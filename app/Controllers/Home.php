@@ -48,4 +48,19 @@ class Home extends BaseController
    {
         return view("product-details");
    }
+
+   public function productCatalog(): string
+   {
+    return view('catalog');
+   }
+
+    public function checkout(): string
+   {
+    return view('checkout');
+   }
+
+    public function profile(): string
+   {
+    return view('profile');
+   }
 }
