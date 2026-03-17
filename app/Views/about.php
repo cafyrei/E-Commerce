@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
-    <title>E-Commerce</title>
+    <title>About</title>
 </head>
-
 <body>
 
     <nav>
@@ -19,18 +17,14 @@
         <div class="nav-links">
             <a href="<?= base_url('/') ?>">Home</a>
             <a href="<?= base_url('about') ?>">About</a>
-            <a href="<?= base_url('admin_signin') ?>">Sign In</a>
+            <a href="<?= base_url('contact') ?>">Contact</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>
-            Crafted In Wood.
-            <span>Built to last.</span>
-        </h1>
-        <p>Handmade wooden furniture and pieces shaped by time, grain, and care.</p>
-        <a href="<?= base_url('home2') ?>" class="btn">Show more</a>
-    </header>
+    <div style="padding: 120px 50px; color: white;">
+        <h1>About Page</h1>
+        <p>This is the About page.</p>
+    </div>
 
 </body>
 </html>
