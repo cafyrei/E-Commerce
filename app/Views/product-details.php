@@ -13,7 +13,7 @@
     <nav>
         <div class="logo">
             <a href="<?= base_url() ?>">
-                <img src="<?= base_url('../images/alt-logo.png') ?>" alt="Furniture Brand Logo">
+                <img src="<?= base_url('images/alt-logo.png') ?>" alt="Furniture Brand Logo">
             </a>
         </div>
         <div class="website-title">
@@ -30,30 +30,19 @@
         <div class="breadcrumb">
             <a href="#">Home Page</a> /
             <a href="#">Collections</a> /
-            <span>{Product Name}</span>
+            <span><?= esc($product['productName']) ?></span>
         </div>
 
         <div class="product-container">
-            <div class="product-images">
-                <div class="image"><img src="#" alt="Product Image 1"></div>
-                <div class="image"><img src="#" alt="Product Image 2"></div>
-                <div class="image"><img src="#" alt="Product Image 3"></div>
-                <div class="image"><img src="#" alt="Product Image 4"></div>
+            <div class="product-image">
+                <div class="image"><img src="<?= base_url('images/' . $product['productImage']); ?>" alt="Product Image"></div>
             </div>
 
             <div class="product-details">
-                <span class="status">{Status}</span>
-                <h1 class="product-name">{Product Name}</h1>
-                <p class="product-price">₱{Price} <small>Taxes Included</small></p>
-
-                <div class="product-color">
-                    <span>Color:</span>
-                    <span class="selected-color">BLACK</span>
-                    <div class="color-options">
-                        <div class="color-circle" style="background-color: black;"></div>
-                        <div class="color-circle" style="background-color: gray;"></div>
-                </div>
-                </div>
+                <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
+                <h1 class="product-name"><?= esc($product['productName']) ?></h1>
+                <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
+            </div>
 
                 <div class="product-quantity">
                     <label for="quantity">Quantity</label>
@@ -65,7 +54,7 @@
                 </div>
 
                 <div class="stock-bar">
-                    <span>Only {stocks} left</span>
+                    <span>Only <?= esc($product['productStock']) ?> left</span>
                     <div class="stock-progress">
                         <div class="stock-fill" ></div>
                     </div>
@@ -93,7 +82,7 @@
         </div>
     </main>
 
-    <div class="cart-overlay"></div>
+    <!-- <div class="cart-overlay"></div>
     <div class="cart-container">
         <h2>Your Cart <span class="item-count">2 Items</span></h2>
 
@@ -102,7 +91,7 @@
                 <div class="cart-item">
                     <div class="item-image"></div>
                     <div class="item-details">
-                        <p class="item-name">Product Name</p>
+                        <p class="item-name"><?= esc($product['productName']) ?></p>
                         <p class="item-type">Furniture Type</p>
 
                         <div class="item-controls">
@@ -151,6 +140,6 @@
                  <button class="checkout-btn">Proceed to Checkout</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
