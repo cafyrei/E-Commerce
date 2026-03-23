@@ -37,9 +37,13 @@ class Home extends BaseController
         return view('admin_signin'); // admin
     }
 
-    public function productDetails(): string
+    public function productDetails($id): string
     {
-        return view("product-details");
+         $model = new ProductModel();
+
+        $product = $model->find($id);
+
+        return view("product-details", ['product' => $product]);
     }
 
     public function productCatalog(): string
