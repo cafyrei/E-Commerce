@@ -8,6 +8,7 @@ if ($sess->has('user_id')) {
     $model = new UserModel();
     $user = $model->find($sess->get('user_id'));
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ if ($sess->has('user_id')) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/navbar.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-light.css') ?>">
     <title>E-Commerce</title>
 </head>
 

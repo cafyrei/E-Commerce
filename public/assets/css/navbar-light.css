@@ -42,6 +42,7 @@ nav .nav-links span {
 
 nav img {
   height: 50px;
+  filter: invert(100%)
 }
 
 .nav-links a:hover {
@@ -93,6 +94,7 @@ nav img {
 .greetings span {
   font-size: 2rem;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 100;
 }
 
 .logo {
