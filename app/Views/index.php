@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
     <title>E-Commerce</title>
 </head>
 
@@ -13,7 +13,7 @@
     <nav>
         <div class="logo">
             <a href="<?= base_url() ?>">
-                <img src="<?= base_url('images/Logo.png') ?>" alt="Furniture Brand Logo">
+                <img src="<?= base_url('assets/images/Logo.png') ?>" alt="Furniture Brand Logo">
             </a>
         </div>
         <div class="nav-links">

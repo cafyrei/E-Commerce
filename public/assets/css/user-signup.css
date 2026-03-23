@@ -1,0 +1,272 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(173, 173, 173, 0.4)),
+    url("../images/interior-images/sign-up-interior.jpg") no-repeat center
+      center fixed;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  width: 1200px;
+  height: 750px;
+  border-radius: 70px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+/* LEFT SIDE: IMAGE */
+.image-side {
+  width: 50%;
+  background: url("../images/interior-images/signup-join.jpg") no-repeat center;
+  background-size: cover;
+  position: relative;
+  /* Curve points TOWARDS the form on the right */
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  z-index: 2;
+}
+
+.image-side::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.quote-box {
+  position: relative;
+  z-index: 3;
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  text-align: left;
+}
+
+.quote-box h2 {
+  font-size: 2.3rem;
+}
+.quote-box span {
+  font-size: 3.6rem;
+  font-weight: bold;
+}
+
+/* RIGHT SIDE: FORM */
+.form-side {
+  width: 50%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.form-box {
+  width: 400px;
+}
+
+.form-box h2 {
+  font-size: 2.3rem;
+  margin-bottom: 5px;
+}
+.form-box h3 {
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border-radius: 20px;
+  border: none;
+  background-color: #f5f5f5;
+  outline: none;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+.input-icon img {
+  width: 18px;
+  opacity: 0.6;
+}
+
+.name-input-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.name-input-group .name-division {
+  display: flex;
+  gap: 10px;
+}
+
+.name-input-group .name-division .input-group {
+  min-width: 50px;
+}
+
+.name-input-group .name-division:nth-child(1) .input-group {
+  flex: 1;
+}
+
+.name-input-group .name-division:nth-child(2) .input-group:nth-child(1) {
+  flex: 8;
+}
+
+.name-input-group .name-division:nth-child(2) .input-group:nth-child(2) {
+  flex: 2;
+}
+
+.name-input-group .name-division:nth-child(2) select {
+  padding-left: 12px;
+  color: #666;
+  font-size: 14px;
+}
+
+.name-input-group .name-division select {
+  width: 100%;
+  padding: 15px 5px 15px 0; 
+  border-radius: 20px;
+  border: none;
+  background-color: #f5f5f5;
+  outline: none;
+
+  /* remove default arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+
+  background-image: url('../images/social-icons/form-icons/arrow-down-sign-to-navigate.png');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 8px; 
+}
+.main-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 28px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.login-link a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.or-separator {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.or-separator::before,
+.or-separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #eee;
+  margin: 0 10px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-buttons button {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.social-buttons .facebook {
+  background: #1877f2;
+}
+.social-buttons .google {
+  background: #db4437;
+}
+.social-buttons .apple {
+  background: #000;
+}
+.social-buttons button img {
+  width: 20px;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 95%;
+    height: auto;
+    flex-direction: column;
+    border-radius: 30px;
+  }
+  .image-side,
+  .form-side {
+    width: 100%;
+  }
+  .image-side {
+    border-radius: 0;
+    height: 300px;
+  }
+  .image-side::after {
+    border-radius: 0;
+  }
+}
