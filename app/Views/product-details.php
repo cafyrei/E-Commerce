@@ -34,11 +34,8 @@
         </div>
 
         <div class="product-container">
-            <div class="product-images">
-                <div class="image"><img src="#" alt="Product Image 1"></div>
-                <div class="image"><img src="#" alt="Product Image 2"></div>
-                <div class="image"><img src="#" alt="Product Image 3"></div>
-                <div class="image"><img src="#" alt="Product Image 4"></div>
+            <div class="product-image">
+                <div class="image"><img src="<?= base_url('images/' . $product['productImage']); ?>" alt="Product Image"></div>
             </div>
 
             <div class="product-details">
@@ -85,7 +82,7 @@
         </div>
     </main>
 
-    <div class="cart-overlay"></div>
+    <!-- <div class="cart-overlay"></div>
     <div class="cart-container">
         <h2>Your Cart <span class="item-count">2 Items</span></h2>
 
@@ -143,6 +140,6 @@
                  <button class="checkout-btn">Proceed to Checkout</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>

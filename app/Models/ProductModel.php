@@ -6,8 +6,9 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model {
 
-     protected $table      = 'product';
+    protected $table      = 'product';
     protected $primaryKey = 'productID';
+    protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $allowedFields    = [
         'productImage',
