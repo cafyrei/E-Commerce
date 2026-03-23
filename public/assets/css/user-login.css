@@ -88,7 +88,8 @@ body {
 .register-container {
   width: 50%;
   text-align: left;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  font: 8px;
 }
 
 .input-group {
@@ -212,11 +213,19 @@ button:hover {
   transition: 0.3s;
 }
 
-.social-buttons .facebook { background: #1877f2; }
-.social-buttons .google { background: #db4437; }
-.social-buttons .apple { background: #000; }
-.social-buttons button img { width: 20px; filter: brightness(0) invert(1); }
-
+.social-buttons .facebook {
+  background: #1877f2;
+}
+.social-buttons .google {
+  background: #db4437;
+}
+.social-buttons .apple {
+  background: #000;
+}
+.social-buttons button img {
+  width: 20px;
+  filter: brightness(0) invert(1);
+}
 
 .social-buttons button:hover {
   opacity: 0.85;

@@ -11,7 +11,7 @@ class Auth extends BaseController
         helper(['form']);
         $model = new UserModel();
 
-        if ($this->request->getServer('REQUEST_METHOD')) {
+        if ($this->request->getMethod() === 'post') {
 
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
@@ -43,7 +43,7 @@ class Auth extends BaseController
         helper(['form']);
         $model = new UserModel();
 
-        if ( $this->request->getServer('REQUEST_METHOD')) {
+        if ($this->request->getMethod() === 'post') {
             log_message('debug', 'Signup POST received'); // Just for Debug
             $validationRules = [
                 'first_name' => 'required|min_length[2]',
@@ -72,5 +72,14 @@ class Auth extends BaseController
         }
 
         return view('auth/signup');
+    }
+
+    public function logout()
+    {
+        $session = session();
+
+        $session->destroy();
+
+        return redirect()->to('login');
     }
 }

@@ -20,43 +20,11 @@ body {
   line-height: 1.6;
 }
 
-/* NAVIGATION */
-nav,
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 5%;
-  background: rgba(255, 255, 255, 0.95);
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
 
 .logo img {
   width: auto;
   height: 60px;
   display: block;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-}
-
-.nav-links a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.nav-links a:hover {
-  color: var(--primary);
 }
 
 /* HOME PAGE 1 */
@@ -68,10 +36,16 @@ nav,
   align-items: flex-start;
   text-align: left;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)),
+    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
     url("../images/main-photo.jpg") center/cover no-repeat;
   padding-left: 5%;
   color: white;
+
+}
+
+.user-greetings{
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .hero h1 {

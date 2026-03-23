@@ -1,3 +1,15 @@
+<?php
+
+use App\Models\UserModel;
+
+$sess = session();
+
+if ($sess->has('user_id')) {
+    $model = new UserModel();
+    $user = $model->find($sess->get('user_id'));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,23 +17,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar.css') ?>">
     <title>E-Commerce</title>
 </head>
 
 <body>
-
-    <nav>
-        <div class="logo">
-            <a href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/images/Logo.png') ?>" alt="Furniture Brand Logo">
-            </a>
-        </div>
-        <div class="nav-links">
-            <a href="<?= base_url('/') ?>">Home</a>
-            <a href="<?= base_url('about') ?>">About</a>
-            <a href="<?= base_url('admin_signin') ?>">Sign In</a>
-        </div>
-    </nav>
+    <?php include 'partials/navbar.php'; ?>
 
     <header class="hero">
         <h1>
@@ -29,8 +30,9 @@
             <span>Built to last.</span>
         </h1>
         <p>Handmade wooden furniture and pieces shaped by time, grain, and care.</p>
-        <a href="<?= base_url('home2') ?>" class="btn">Show more</a>
+        <a href="<?= base_url('home2') ?>" class="small-btn">Show more</a>
     </header>
 
 </body>
+
 </html>

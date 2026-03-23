@@ -11,7 +11,6 @@ class Home extends BaseController
         return view('index');
     }
 
-
     public function home2(): string
     {
         return view('home2');
@@ -25,11 +24,6 @@ class Home extends BaseController
     public function contact(): string
     {
         return view('contact');
-    }
-
-    public function signin(): string
-    {
-        return view('signin'); // client
     }
 
     public function adminSignin(): string
