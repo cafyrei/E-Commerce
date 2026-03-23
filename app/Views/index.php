@@ -72,7 +72,7 @@ if ($sess->has('user_id')) {
                     <div class="img-area">Image</div>
                     <div class="feat-footer">
                         <div>
-                            <h3>Header</h3>
+                            <h2>Header</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                         <a href="#" class="small-btn">Shop now</a>
@@ -80,12 +80,12 @@ if ($sess->has('user_id')) {
                 </div>
                 <div class="feat-box">
                     <div class="img-area">Image</div>
-                    <h3>Header</h3>
+                    <h2>Header</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="feat-box">
                     <div class="img-area">Image</div>
-                    <h3>Header</h3>
+                    <h2>Header</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
@@ -93,7 +93,7 @@ if ($sess->has('user_id')) {
     </div>
 
     <div class="home2-container">
-                <section class="custom-project-box">
+        <section class="custom-project-box">
             <div class="custom-content">
                 <h3>Header</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
@@ -110,6 +110,12 @@ if ($sess->has('user_id')) {
     </div>
 
     <section class="featured-slider">
+        <div class="slider-cta">
+            <p class="cta-quote">"Furniture that tells a story, crafted for yours."</p>
+            <h2 class="cta-title">Bring Nature Home</h2>
+            <a href="<?= base_url('shop') ?>" class="btn">Shop With Us</a>
+        </div>
+
         <div class="slider-wrapper">
             <div class="feat-slide active">
                 <img src="<?= base_url('assets/images/featured-photos/featured-2.jpg') ?>" alt="Handcrafted Table">

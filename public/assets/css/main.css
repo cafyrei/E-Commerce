@@ -28,14 +28,14 @@ body {
 
 /* HOME PAGE 1 */
 .hero {
-  height: 100vh;
+  height: 69vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   text-align: left;
   background:
-    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),
     url("../images/main-photo.jpg") center/cover no-repeat;
   padding-left: 5%;
   color: white;
@@ -49,7 +49,7 @@ body {
 .hero h1 {
   font-size: 5.4rem;
   margin-bottom: 0;
-  margin-top: 30rem;
+  margin-top: 18rem;
   line-height: 1.1;
   text-transform: uppercase;
 }
@@ -92,7 +92,6 @@ body {
   transform: translateY(-1px);
 }
 
-/* GENERIC SECTION WRAPPERS */
 .container {
   padding: 50px 5%;
 }
@@ -585,6 +584,10 @@ body {
   border-radius: 12px;
 }
 
+.feat-box h2 {
+  color: #1a1a1a;
+}
+
 .feat-box.large {
   display: flex;
   flex-direction: column;
@@ -606,7 +609,6 @@ body {
   justify-content: space-between;
   align-items: flex-end;
 }
-
 
 .feat-footer .small-btn {
   font-weight: bold;
@@ -632,7 +634,7 @@ body {
 
 .home2-container:nth-of-type(2) .section-title,
 .home2-container:nth-of-type(2) h3 {
-  color: #0c0c0c;
+  color: #ffffff;
 }
 
 .home2-container:nth-of-type(2) p {
@@ -680,6 +682,48 @@ body {
   text-align: center;
   margin-top: 60px;
   font-size: 2.2rem;
+}
+
+.slider-cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* The secret to perfect centering */
+  z-index: 5; /* Sit above the images but below the nav buttons */
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  color: white;
+}
+
+.cta-quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.cta-title {
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.feat-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.3
+  );
 }
 
 @media (max-width: 768px) {
