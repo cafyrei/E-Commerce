@@ -1,3 +1,10 @@
+<?php if (session()->getFlashdata('error')): ?>
+  <div class="error">
+    <?= session()->getFlashdata('error') ?>
+  </div>
+<?php endif; ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -21,38 +28,42 @@
             laboriosam exercitationem libero,
           </h3>
 
-          <div class="input-group">
-            <span class="input-icon">
-              <img src="<?= base_url('assets/images/social-icons/form-icons/email-icon.png') ?>" alt="email" />
-            </span>
-            <input type="text" placeholder="Email Address" />
-          </div>
+          <form action="<?= site_url('login') ?>" method="post">
 
-          <div class="input-group">
-            <span class="input-icon">
-              <img src="<?= base_url('assets/images/social-icons/form-icons/lock-icon.png') ?>" alt="password" />
-            </span>
-            <input type="password" placeholder="Password" />
-          </div>
-
-          <div class="login-options-container">
-            <div class="checkbox-group">
-              <input type="checkbox" id="remember" name="remember" />
-              <label for="remember">Remember Me</label>
+            <div class="input-group">
+              <span class="input-icon">
+                <img src="<?= base_url('assets/images/social-icons/form-icons/email-icon.png') ?>" alt="email" />
+              </span>
+              <input name="email" type="text" placeholder="Email Address" required />
             </div>
-            <div class="forgot-container">
-              <a href="#">Forgot Password?</a>
-            </div>
-          </div>
 
-          <button>Login</button>
+            <div class="input-group">
+              <span class="input-icon">
+                <img src="<?= base_url('assets/images/social-icons/form-icons/lock-icon.png') ?>" alt="password" />
+              </span>
+              <input name="password" type="password" placeholder="Password" required />
+            </div>
+
+            <div class="login-options-container">
+              <div class="checkbox-group">
+                <input type="checkbox" id="remember" name="remember" />
+                <label for="remember">Remember Me</label>
+              </div>
+              <div class="forgot-container">
+                <a href="#">Forgot Password?</a>
+              </div>
+            </div>
+
+            <button type="submit" class="main-btn">Login</button>
+
+          </form>
 
           <div class="register-container">
             <a href="#">Don't Have an Account?</a>
           </div>
 
           <div class="create-account">
-            <button>Create Account</button>
+            <button onclick="location.href='<?= base_url('signup')?>'">Create Account</button>
           </div>
 
           <div class="social-login">

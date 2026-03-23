@@ -6,8 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('login', 'Home::login');
-$routes->match(['get', 'post'],'signup', 'Home::signup');
+
+// Authorization
+$routes->match(['get', 'post'], 'login', 'Auth::login');
+$routes->match(['get', 'post'], 'signup', 'Auth::signup');
+
 $routes->get('product-details', 'Home::productDetails');
 $routes->get('catalog', 'Home::productCatalog');
 $routes->get('checkout', 'Home::checkout');
