@@ -17,9 +17,9 @@
             </a>
         </div>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="<?= base_url('/') ?>">Home</a>
+            <a href="<?= base_url('about') ?>">About</a>
+            <a href="<?= base_url('admin_signin') ?>">Sign In</a>
         </div>
     </nav>
 
@@ -29,10 +29,8 @@
             <span>Built to last.</span>
         </h1>
         <p>Handmade wooden furniture and pieces shaped by time, grain, and care.</p>
-        <a href="#" class="btn">Show more</a>
+        <a href="<?= base_url('home2') ?>" class="btn">Show more</a>
     </header>
 
-
 </body>
-
 </html>
