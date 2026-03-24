@@ -27,7 +27,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
-  padding: 0 2rem; 
+  padding: 0 2rem;
   box-sizing: border-box;
 }
 
@@ -36,7 +36,7 @@ nav .nav-links span {
   margin-left: 20px;
   text-decoration: none;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--text); 
+  color: var(--text);
   font-size: 14px;
   font-weight: 600;
   transition: 0.3s;
@@ -128,25 +128,36 @@ nav img {
   display: flex;
   gap: 2rem;
   padding: 2rem;
-  /* max-width: 1400px; */
   margin: 0 auto;
   align-items: flex-start;
-  margin-top: 80px;
+  margin-top: 130px;
+  min-height: 100vh;
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 110px;
+  height: fit-content;
+  align-self: flex-start;
+  z-index: 500;
+  flex-shrink: 0;
 }
 
 .sidebar {
   width: 280px;
-  flex-shrink: 0;
-  align-self: flex-start;
+  background: transparent;
+}
+
+.catalog-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .filter-container {
-  background: var(--card-bg);
+  background: var(--card-bg) !important;
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 1.5rem;
-  position: sticky;
-  top: 2rem;
   border: 1px solid var(--border);
 }
 
@@ -348,11 +359,15 @@ nav img {
 @media (max-width: 992px) {
   .catalog-wrapper {
     flex-direction: column;
+    margin-top: 130px;
   }
   .sidebar {
     width: 100%;
+    order: -1;
   }
   .filter-container {
-    position: static;
+    position: static !important;
+    z-index: auto !important;
+    margin-bottom: 2rem;
   }
 }
