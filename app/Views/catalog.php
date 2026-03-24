@@ -26,7 +26,6 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
     <title>Artisan Furniture | Product Catalog</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/catalog-modern.css') ?>">
 </head>
-
 <body>
 
     <?php include 'partials/navbar.php'; ?>
@@ -108,7 +107,7 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
                                     alt="<?= esc($product['productName']) ?>"
                                     style="width:100%; height:100%; object-fit:cover;">
                                 <div class="overlay">
-                                    <button class="view-btn">Quick View</button>
+                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">Quick View</button></a>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -126,5 +125,4 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
     </div>
 
 </body>
-
 </html>
