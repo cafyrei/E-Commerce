@@ -74,16 +74,17 @@ nav {
   gap: 15px;
 }
 
-.product-images {
+.product-image {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  align-items: start;
+  align-items:center;
 }
 
-.product-images .image {
+.product-image .image {
   width: 100%;
-  background: #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
 }
 
 .product-details {
@@ -131,20 +132,25 @@ nav {
 }
 
 .quantity-control {
-    display: flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
+  background: #d3d3d3;
+  padding: 10px 15px;
+  gap: 15px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
 }
 
 .quantity-control button {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.quantity-control input {
-    width: 50px;
-    height: 30px;
-    text-align: center;
+.quantity-control span {
+  min-width: 20px;
+  text-align: center;
 }
 
 .stock-bar {
@@ -165,6 +171,7 @@ nav {
 }
 
 .product-actions {
+    margin-top: 2em;
     display: flex;
     gap: 10px;
 }

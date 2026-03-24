@@ -4,52 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= base_url('css/product-details.css') ?>">
-    <title>Product Detail</title>
+    <link rel="stylesheet" href="<?= base_url('assets/css/product-details.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
+    <title><?= esc($product['productName']) ?></title>
 </head>
 
 <body>
 
-    <nav>
-        <div class="logo">
-            <a href="<?= base_url() ?>">
-                <img src="<?= base_url('images/alt-logo.png') ?>" alt="Furniture Brand Logo">
-            </a>
-        </div>
-        <div class="website-title">
-            <p>Website Name</p>
-        </div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
-    </nav>
+    <?php include 'partials/navbar.php'; ?>
 
     <main class="product-page">
         <div class="breadcrumb">
-            <a href="#">Home Page</a> /
-            <a href="#">Collections</a> /
+            <a href="<?= base_url('/')?>">Home Page</a> /
+            <a href="<?= base_url('catalog')?>">Collections</a> /
             <span><?= esc($product['productName']) ?></span>
         </div>
 
         <div class="product-container">
-            <div class="product-image">
-                <div class="image"><img src="<?= base_url('images/' . $product['productImage']); ?>" alt="Product Image"></div>
+            <div class="left-side">
+                <div class="product-image">
+                    <div class="image"><img src="<?= base_url('assets/images/product-images/' . esc($product['productImage'])); ?>" alt="Product Image"></div>
+                </div>
             </div>
 
-            <div class="product-details">
-                <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
-                <h1 class="product-name"><?= esc($product['productName']) ?></h1>
-                <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
-            </div>
+            <div class="right-side">
+                <div class="product-details">
+                    <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
+                    <h1 class="product-name"><?= esc($product['productName']) ?></h1>
+                    <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
+                </div>
 
                 <div class="product-quantity">
-                    <label for="quantity">Quantity</label>
+                    <div class="quantity-lbl">
+                        <label for="quantity">Quantity</label>
+                    </div>
+
                     <div class="quantity-control">
-                        <button>-</button>
-                        <input type="number" id="quantity" value="1" min="1">
-                        <button>+</button>
+                        <button class="minus">-</button>
+                        <span id="qty">1</span>
+                        <button class="plus">+</button>
                     </div>
                 </div>
 
@@ -64,14 +57,24 @@
                     <button class="add-to-cart">Add to Cart</button>
                     <button class="buy-now">Buy it now</button>
                 </div>
+
                 <div class="product-info">
                     <details>
                         <summary>Description & Specifications</summary>
-                        <p>Product description here...</p>
-                    </details>
-                    <details>
-                        <summary>How to get the right size</summary>
-                        <p>Size guide information...</p>
+                        <p><?= esc($product['productDescription']) ?></p>
+                        <h4>Specifications</h4>
+                        <h5>Material</h5>
+                        <ul>
+                            <li><?= esc($product['productMaterial']) ?></li>
+                        </ul>
+                        <h5>Dimension</h5>
+                        <ul>
+                            <li><?= esc($product['productDimension']) ?></li>
+                        </ul>
+                        <h5>Weight Capacity</h5>
+                        <ul>
+                            <li><?= esc($product['productWeightCapacity']) ?></li>
+                        </ul>
                     </details>
                     <details>
                         <summary>Shipping and Delivery</summary>
@@ -79,67 +82,36 @@
                     </details>
                 </div>
             </div>
-        </div>
     </main>
-
-    <!-- <div class="cart-overlay"></div>
-    <div class="cart-container">
-        <h2>Your Cart <span class="item-count">2 Items</span></h2>
-
-        <div class="cart-items">
-            <div class="cart-item">
-                <div class="cart-item">
-                    <div class="item-image"></div>
-                    <div class="item-details">
-                        <p class="item-name"><?= esc($product['productName']) ?></p>
-                        <p class="item-type">Furniture Type</p>
-
-                        <div class="item-controls">
-                        <div class="quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                        <p class="price">₱999</p>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="cart-item">
-                    <div class="item-image"></div>
-                    <div class="item-details">
-                        <p class="item-name">Product Name</p>
-                        <p class="item-type">Furniture Type</p>
-
-                        <div class="item-controls">
-                        <div class="quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                        <p class="price">₱999</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-summary">
-                <div class="summary-row">
-                    <span>Product 1</span>
-                    <span>₱999</span>
-                </div>
-                <div class="summary-row">
-                    <span>Product 2</span>
-                    <span>₱999</span>
-                </div>
-                <div class="summary-total">
-                    <strong>Total</strong>
-                    <strong>₱1998</strong>
-                </div>
-
-                 <button class="checkout-btn">Proceed to Checkout</button>
-            </div>
-        </div>
-    </div> -->
 </body>
+
+<script>
+    function updateButtons() {
+        minusBtn.disabled = count <= 1;
+        plusBtn.disabled = count >= maxStock;
+    }
+
+    const minusBtn = document.querySelector(".minus");
+    const plusBtn = document.querySelector(".plus");
+    const qty = document.getElementById("qty");
+    const maxStock = <?= (int)$product['productStock'] ?>;
+
+let count = 1;
+
+plusBtn.addEventListener("click", () => {
+    if (count < maxStock){
+        count++;
+        qty.textContent = count;
+    }
+    updateButtons();
+});
+
+minusBtn.addEventListener("click", () => {
+  if (count > 1) {
+    count--;
+    qty.textContent = count;
+  }
+  updateButtons();
+});
+</script>
 </html>

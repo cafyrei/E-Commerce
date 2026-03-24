@@ -114,7 +114,7 @@ if ($sess->has('user_id')) {
         <div class="slider-cta">
             <p class="cta-quote">"Furniture that tells a story, crafted for yours."</p>
             <h2 class="cta-title">Bring Nature Home</h2>
-            <a href="<?= base_url('shop') ?>" class="btn">Shop With Us</a>
+            <a href="<?= base_url('catalog') ?>" class="btn">Shop With Us</a>
         </div>
 
         <div class="slider-wrapper">

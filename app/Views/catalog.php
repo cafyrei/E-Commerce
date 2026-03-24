@@ -8,11 +8,13 @@ $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
 
 <head>
     <title>Product Catalog</title>
-    <link rel="stylesheet" href="<?= base_url('css/Catstyle.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/Catstyle.css') ?>">
 </head>
 
 <body>
-
+    <?php include 'partials/navbar.php'; ?>
     <div class="container">
 
         <div class="filters">
@@ -90,7 +92,7 @@ $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
 
             <div class="product-grid">
 
-                <?php for ($i = 1; $i <= 8; $i++) { ?>
+                <?php for ($i = 1; $i <= 10; $i++) { ?>
 
                     <div class="product-card">
 

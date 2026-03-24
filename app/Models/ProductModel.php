@@ -14,6 +14,10 @@ class ProductModel extends Model {
         'productImage',
         'productName',
         'productStock',
-        'productPrice'
+        'productPrice',
+        'productDescription',
+        'productMaterial',
+        'productDimension',
+        'productWeightCapacity'
     ];
 }
