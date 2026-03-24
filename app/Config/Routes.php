@@ -24,6 +24,10 @@ $routes->get('catalog', 'Catalog::index');
 
 // Product Details
 $routes->get('product-details/(:num)', 'Home::productDetails/$1');
+
+// Adding Cart
+$routes->post('cart/add', 'CartController::add');
+
 $routes->get('catalog', 'Home::productCatalog');
 $routes->get('checkout', 'Home::checkout');
 $routes->get('signup', 'Home::signup');

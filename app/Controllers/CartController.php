@@ -11,7 +11,7 @@ public function add()
     $productID = $this->request->getPost('productID');
     $qty = (int) $this->request->getPost('qty');
 
-    $userID = session()->get('userID'); // since you have login
+    $userID = session()->get('user_id'); // since you have login
 
     $cartModel = new CartModel();
     $cartItemModel = new CartItemModel();

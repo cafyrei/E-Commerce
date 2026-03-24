@@ -17,16 +17,16 @@ $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/checkout.css') ?>">
 </head>
 <body>
     <div class="container">
         <div class="checkout-left">
             <div class="tabs">
-                <a href="?tab=customer&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>" 
+                <a href="?tab=customer&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>"
                 class="<?= ($active == 'customer') ? 'active' : '' ?>">Customer Information</a>
-                
-                <a href="?tab=shipping&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>" 
+
+                <a href="?tab=shipping&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>"
                 class="<?= ($active == 'shipping') ? 'active' : '' ?>">Shipping Method</a>
             </div>
 

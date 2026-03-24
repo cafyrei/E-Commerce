@@ -26,35 +26,41 @@
             </div>
 
             <div class="right-side">
-                <div class="product-details">
-                    <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
-                    <h1 class="product-name"><?= esc($product['productName']) ?></h1>
-                    <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
-                </div>
-
-                <div class="product-quantity">
-                    <div class="quantity-lbl">
-                        <label for="quantity">Quantity</label>
+                <form action="<?= base_url('cart/add') ?>" method="post">
+                    <div class="product-details">
+                        <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
+                        <h1 class="product-name"><?= esc($product['productName']) ?></h1>
+                        <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
                     </div>
 
-                    <div class="quantity-control">
-                        <button class="minus">-</button>
-                        <span id="qty">1</span>
-                        <button class="plus">+</button>
-                    </div>
-                </div>
+                    <div class="product-quantity">
+                        <div class="quantity-lbl">
+                            <label for="quantity">Quantity</label>
+                        </div>
 
-                <div class="stock-bar">
-                    <span>Only <?= esc($product['productStock']) ?> left</span>
-                    <div class="stock-progress">
-                        <div class="stock-fill" ></div>
-                    </div>
-                </div>
+                        <div class="quantity-control">
+                            <button type="button" class="minus">-</button>
+                            <span id="qty">1</span>
+                            <button type="button" class="plus">+</button>
 
-                <div class="product-actions">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy it now</button>
-                </div>
+                            <!-- Hidden inputs for back-end -->
+                            <input type="hidden" name="productID" value="<?= $product['productID'] ?>">
+                            <input type="hidden" name="qty" id="qtyInput" value="1">
+                        </div>
+                    </div>
+
+                    <div class="stock-bar">
+                        <span>Only <?= esc($product['productStock']) ?> left</span>
+                        <div class="stock-progress">
+                            <div class="stock-fill" ></div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
+                        <button type="button" class="buy-now">Buy it now</button>
+                    </div>
+                </form>
 
                 <div class="product-info">
                     <details>
@@ -92,6 +98,7 @@
     const minusBtn = document.querySelector(".minus");
     const plusBtn = document.querySelector(".plus");
     const qty = document.getElementById("qty");
+    const qtyInput = document.getElementById("qty");
     const maxStock = <?= (int)$product['productStock'] ?>;
 
 let count = 1;
@@ -100,6 +107,7 @@ plusBtn.addEventListener("click", () => {
     if (count < maxStock){
         count++;
         qty.textContent = count;
+        qtyInput.value = count;
     }
     updateButtons();
 });
@@ -108,6 +116,7 @@ minusBtn.addEventListener("click", () => {
   if (count > 1) {
     count--;
     qty.textContent = count;
+    qtyInput.value = count;
   }
   updateButtons();
 });
