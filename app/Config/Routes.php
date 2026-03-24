@@ -22,6 +22,11 @@ $routes->post('user/deleteAddress/(:num)', 'User::deleteAddress/$1');
 // Catalog
 $routes->get('catalog', 'Catalog::index');
 
+// Admin
+$routes->get('admin', 'Admin\Admin::index');
+$routes->get('admin/deleteUser/(:num)', 'Admin\Admin::deleteUser/$1');
+$routes->get('admin/deleteProduct/(:num)', 'Admin\Admin::deleteProduct/$1');
+
 // Product Details
 $routes->get('product-details/(:num)', 'Home::productDetails/$1');
 $routes->get('catalog', 'Home::productCatalog');
