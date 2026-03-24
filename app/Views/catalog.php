@@ -32,39 +32,41 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
     <?php include 'partials/navbar.php'; ?>
 
     <div class="catalog-wrapper">
-        <aside class="sidebar">
-            <form action="<?= base_url('catalog') ?>" method="get">
-                <div class="filter-container">
-                    <div class="sidebar-header">
-                        <h3 style="margin:0">Filters</h3>
-                        <a href="<?= base_url('catalog') ?>" class="reset-btn" style="text-decoration:none;">Reset All</a>
-                    </div>
-
-                    <div class="filter-group">
-                        <h4>Categories</h4>
-                        <?php foreach ($categories as $cat): ?>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="category[]" value="<?= $cat; ?>"
-                                    <?= (isset($_GET['category']) && in_array($cat, $_GET['category'])) ? 'checked' : '' ?>>
-                                <span><?= $cat; ?></span>
-                            </label>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <div class="filter-group">
-                        <h4>Price Range</h4>
-                        <div class="price-range">
-                            <input type="number" name="min_price" placeholder="Min" class="price-input"
-                                value="<?= service('request')->getVar('min_price') ?>">
-                            <span style="color:var(--border)">—</span>
-                            <input type="number" name="max_price" placeholder="Max" class="price-input"
-                                value="<?= service('request')->getVar('max_price') ?>">
+        <div class="sidebar-sticky">
+            <aside class="sidebar">
+                <form action="<?= base_url('catalog') ?>" method="get">
+                    <div class="filter-container">
+                        <div class="sidebar-header">
+                            <h3 style="margin:0">Filters</h3>
+                            <a href="<?= base_url('catalog') ?>" class="reset-btn" style="text-decoration:none;">Reset All</a>
                         </div>
-                        <button type="submit" class="view-btn" style="width: 100%; margin-top: 1rem;">Apply Filter</button>
+
+                        <div class="filter-group">
+                            <h4>Categories</h4>
+                            <?php foreach ($categories as $cat): ?>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="category[]" value="<?= $cat; ?>"
+                                        <?= (isset($_GET['category']) && in_array($cat, $_GET['category'])) ? 'checked' : '' ?>>
+                                    <span><?= $cat; ?></span>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <div class="price-range">
+                                <input type="number" name="min_price" placeholder="Min" class="price-input"
+                                    value="<?= service('request')->getVar('min_price') ?>">
+                                <span style="color:var(--border)">—</span>
+                                <input type="number" name="max_price" placeholder="Max" class="price-input"
+                                    value="<?= service('request')->getVar('max_price') ?>">
+                            </div>
+                            <button type="submit" class="view-btn" style="width: 100%; margin-top: 1rem;">Apply Filter</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </aside>
+                </form>
+            </aside>
+        </div>
 
         <main class="catalog-main">
             <div class="catalog-controls">
@@ -108,7 +110,7 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
                                     alt="<?= esc($product['productName']) ?>"
                                     style="width:100%; height:100%; object-fit:cover;">
                                 <div class="overlay">
-                                    <button class="view-btn">Quick View</button>
+                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">Quick View</button></a>
                                 </div>
                             </div>
                             <div class="product-info">
