@@ -15,6 +15,7 @@ body {
   margin: 0;
 }
 
+/* NAVBAR // HEADER */
 nav {
   position: fixed;
   top: 0;
@@ -200,6 +201,7 @@ nav img {
   margin-top: 10px;
 }
 
+/* Website Title */
 .website-title {
   color: var(--text);
   text-decoration: none;
