@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <?php include 'partials/navbar.php'; ?>
 
     <main class="product-page">
