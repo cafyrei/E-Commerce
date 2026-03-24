@@ -29,9 +29,6 @@
                 </div>
             </nav>
 
-            <div class="sidebar-footer">
-                <p>v2.4.0 Stable</p>
-            </div>
         </aside>
 
         <main class="content-area">
@@ -141,11 +138,9 @@
 
         navItems.forEach(item => {
             item.addEventListener('click', () => {
-                // Remove active classes
                 navItems.forEach(i => i.classList.remove('active'));
                 sections.forEach(s => s.classList.remove('active'));
 
-                // Add active state
                 item.classList.add('active');
                 const targetId = item.getAttribute('data-tab');
                 document.getElementById(targetId).classList.add('active');

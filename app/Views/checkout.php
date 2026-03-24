@@ -10,6 +10,7 @@ $shippingNames = [
     "150" => "Next Day Delivery",
     "200" => "Same Day Delivery"
 ];
+
 $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
 ?>
 <!DOCTYPE html>
@@ -17,16 +18,18 @@ $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/checkout.css') ?>">
 </head>
 <body>
+    <?php include 'partials/navbar.php'; ?>
+
     <div class="container">
         <div class="checkout-left">
             <div class="tabs">
-                <a href="?tab=customer&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>" 
+                <a href="?tab=customer&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>"
                 class="<?= ($active == 'customer') ? 'active' : '' ?>">Customer Information</a>
-                
-                <a href="?tab=shipping&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>" 
+
+                <a href="?tab=shipping&payment=<?= $selectedPayment ?>&shipping=<?= $selectedShipping ?>&address=<?= urlencode($address) ?>"
                 class="<?= ($active == 'shipping') ? 'active' : '' ?>">Shipping Method</a>
             </div>
 
@@ -56,8 +59,8 @@ $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
                         <?php foreach (['Cash On Delivery', 'Online Payment', 'Bank Payment'] as $method): ?>
                             <label class="payment">
                                 <span><?= $method ?></span>
-                                <input type="radio" name="payment" value="<?= $method ?>" 
-                                    <?= ($selectedPayment == $method) ? 'checked' : '' ?> 
+                                <input type="radio" name="payment" value="<?= $method ?>"
+                                    <?= ($selectedPayment == $method) ? 'checked' : '' ?>
                                     onchange="this.form.submit()">
                             </label>
                         <?php endforeach; ?>
@@ -75,8 +78,8 @@ $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
                         <?php foreach ($shippingNames as $price => $name): ?>
                             <label class="shipping">
                                 <span><?= "$name (₱$price)" ?></span>
-                                <input type="radio" name="shipping" value="<?= $price ?>" 
-                                    <?= ($selectedShipping == $price) ? 'checked' : '' ?> 
+                                <input type="radio" name="shipping" value="<?= $price ?>"
+                                    <?= ($selectedShipping == $price) ? 'checked' : '' ?>
                                     onchange="this.form.submit()">
                             </label>
                         <?php endforeach; ?>
@@ -87,39 +90,30 @@ $shippingDisplayName = $shippingNames[$selectedShipping] ?? 'None';
 
         <div class="order-summary">
             <h2>Orders</h2>
-
-            <div class="product">
-                <div class="img"></div>
-                <div class="info">
-                    <p>Chair A</p>
-                    <small>Comfortable chair</small>
-                    <div class="qty-controls">
-                        <button type="button" onclick="changeQty(this, -1)">−</button>
-                        <span class="qty">1</span>
-                        <button type="button" onclick="changeQty(this, 1)">+</button>
+            <?php
+                $total = 0;
+                foreach ($cartItems as $cartItem):
+                    $productItem = $productModel->find($cartItem['productID']);
+                    $subtotal = $productItem['productPrice'] * $cartItem['quantity'];
+                    $total += $subtotal;
+            ?>
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="<?= base_url('assets/images/product-images/' . $productItem['productImage']) ?>">
+                    </div>
+                    
+                    <div class="cart-item-details">
+                        <p class="product-name"><?= esc($productItem['productName']) ?></p>
+                        <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
+                        <small>Qty: <?= $cartItem['quantity'] ?></small>
                     </div>
                 </div>
-                <div class="price" data-price="1000">₱1000</div>
-            </div>
-
-            <div class="product">
-                <div class="img"></div>
-                <div class="info">
-                    <p>Desk B</p>
-                    <small>Wooden desk</small>
-                    <div class="qty-controls">
-                        <button onclick="changeQty(this, -1)">−</button>
-                        <span class="qty">1</span>
-                        <button onclick="changeQty(this, 1)">+</button>
-                    </div>
-                </div>
-                <div class="price" data-price="3500">₱3500</div>
-            </div>
+            <?php endforeach; ?>
 
             <hr>
 
             <div class="total-breakdown">
-                <p>Subtotal: ₱<span id="subtotal">0</span></p>
+                <p>Subtotal: ₱<span><?= number_format($total) ?></span></p>
                 <p>Shipping: ₱<span id="shippingCost"><?= $selectedShipping ?: 0 ?></span></p>
                 <hr>
                 <p><strong>Total: ₱<span id="totalPrice">0</span></strong></p>

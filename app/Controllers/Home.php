@@ -38,6 +38,8 @@ class Home extends BaseController
 
         $product = $model->find($id);
 
+        // dd($product['productName']);
+
         return view("product-details", ['product' => $product]);
     }
 

@@ -1,12 +1,29 @@
 <?php
 use App\Models\UserModel;
+use App\Models\CartModel;
+use App\Models\CartItemModel;
+use App\Models\ProductModel;
 
 $sess = session();
+
+$cartItems = [];
 
 $user = null;
 if ($sess->has('user_id')) {
     $model = new UserModel();
     $user = $model->find($sess->get('user_id'));
+}
+
+if ($user){
+    $cartModel = new CartModel();
+    $cartItemModel = new CartItemModel();
+    $productModel = new ProductModel();
+
+    $cart = $cartModel->where('userID', $user['userID'])->first();
+
+    if ($cart) {
+        $cartItems = $cartItemModel->where('cartID', $cart['cartID'])->findAll();
+    }
 }
 ?>
 
@@ -44,26 +61,71 @@ if ($sess->has('user_id')) {
     </div> 
 
     <!-- CART PANEL -->
-    <div id="cartPanel" class="cart-panel">
-        <h3>Your Cart</h3>
-        <div id="cartItems">
-            <p>Your cart is empty.</p>
-        </div>
-        <button id="closeCart" class="close-cart">Close</button>
+<div id="cartPanel" class="cart-panel">
+    <div class="cart-top">
+        <h1>Your Cart</h1>
+        <h2><?= esc(count($cartItems)) ?> items</h2>
     </div>
+    
+    <div id="cartItems">
+        <?php if (empty($cartItems)): ?>
+            <p>Your cart is empty.</p>
+        <?php else: ?>
+            <?php
+                $total = 0;
+                foreach ($cartItems as $cartItem):
+                    $productItem = $productModel->find($cartItem['productID']);
+                    $subtotal = $productItem['productPrice'] * $cartItem['quantity'];
+                    $total += $subtotal;
+            ?>
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="<?= base_url('assets/images/product-images/' . $productItem['productImage']) ?>">
+                    </div>
+                    
+                    <div class="cart-item-details">
+                        <p class="product-name"><?= esc($productItem['productName']) ?></p>
+                        <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
+                        <small>Qty: <?= $cartItem['quantity'] ?></small>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+    <hr>
+
+    <!-- CART SUMMARY -->
+    <div class="cart-summary">
+        <?php if (!empty($cartItems)): ?>
+            <div class="items">
+                <?php foreach ($cartItems as $cartItem):
+                    $productItem = $productModel->find($cartItem['productID']);
+                ?>
+                    <div class="item">
+                        <span><?= esc($productItem['productName']) ?></span>
+                        <span>₱<?= number_format($productItem['productPrice'] * $cartItem['quantity']) ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="total">
+                <span>Total</span>
+                <span>₱<?= number_format($total) ?></span>
+            </div>
+        <?php endif; ?>
+
+        <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
+    </div>
+</div>
 </nav>
 
 <script>
 const cartBtn = document.getElementById('cartBtn');
 const cartPanel = document.getElementById('cartPanel');
-const closeCart = document.getElementById('closeCart');
 
 cartBtn.addEventListener('click', () => {
     cartPanel.classList.add('active');
-});
-
-closeCart.addEventListener('click', () => {
-    cartPanel.classList.remove('active');
 });
 
 window.addEventListener('click', (e) => {

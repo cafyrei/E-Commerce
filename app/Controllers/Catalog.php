@@ -12,7 +12,7 @@ class Catalog extends BaseController
         $model = new CatalogModel();
 
         $searchTerm = $this->request->getVar('search');
-        $selectedCats = $this->request->getVar('category'); 
+        $selectedCats = $this->request->getVar('category');
         $minPrice = $this->request->getVar('min_price');
         $maxPrice = $this->request->getVar('max_price');
 
