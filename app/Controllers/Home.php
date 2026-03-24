@@ -50,9 +50,4 @@ class Home extends BaseController
     {
         return view('checkout');
     }
-
-    public function profile(): string
-    {
-        return view('profile');
-    }
 }

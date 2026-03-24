@@ -54,15 +54,27 @@ $nav_theme = 'dark';
                             <button class="btn-outline">Edit Photo</button>
                         </div>
 
-                        <form>
+                        <form method="post" action="<?= base_url('updateProfile') ?>">
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>First Name</label>
-                                    <input type="text" name="first_name" value="<?= esc($user['first_name']) ?>">
+                                    <input placeholder="Firstname" type="text" name="first_name" value="<?= esc($user['first_name']) ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Middle Name</label>
+                                    <input placeholder="Middlename" type="text" name="middle_name" value="<?= esc($user['middle_name']) ?>" required>
                                 </div>
                                 <div class="input-group">
                                     <label>Last Name</label>
-                                    <input type="text" name="last_name" value="<?= esc($user['last_name']) ?>">
+                                    <input placeholder="Lastname" type="text" name="last_name" value="<?= esc($user['last_name']) ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Suffix</label>
+                                    <input placeholder="Suffix" type="text" name="suffix" value="<?= !empty($user['suffix']) ? esc($user['suffix']) : '-' ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Contact Number</label>
+                                    <input placeholder="Contact Number" type="text" name="phone_number" value="<?= esc($user['phone_number']) ?>" required>
                                 </div>
                                 <div class="input-group">
                                     <label>Birthdate</label>
@@ -92,7 +104,7 @@ $nav_theme = 'dark';
                         <span class="arrow">▶</span>
                     </div>
                     <div class="accordion-content">
-                        <form>
+                        <form method="post" action="<?= base_url('user/updatePassword') ?>">
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Current Password</label>
@@ -100,7 +112,7 @@ $nav_theme = 'dark';
                                 </div>
                                 <div class="input-group">
                                     <label>New Password</label>
-                                    <input type="password" name="new_password" placeholder="New Password">
+                                    <input type="password" name="password" placeholder="New Password">
                                 </div>
                                 <div class="input-group">
                                     <label>Confirm Password</label>
@@ -123,27 +135,35 @@ $nav_theme = 'dark';
                     </div>
                     <div class="accordion-content">
                         <div class="address-list">
-                            <div class="address-card">
-                                <h4>Home</h4>
-                                <p>Juan Dela Cruz</p>
-                                <p>09123456789</p>
-                                <p>123 Street, Barangay, City, Philippines</p>
-                                <div class="address-actions">
-                                    <button class="btn-outline">Edit</button>
-                                    <button class="btn-outline">Delete</button>
-                                </div>
-                            </div>
+                            <?php if (!empty($addresses)): ?>
+                                <?php foreach ($addresses as $addr): ?>
+                                    <div class="address-card">
+                                        <h4><?= esc($addr['label'] ?? 'Address') ?></h4>
+                                        <p><?= esc($addr['street']) ?></p>
+                                        <p><?= esc($addr['city']) ?>, <?= esc($addr['state']) ?> <?= esc($addr['zip']) ?></p>
+                                        <div class="address-actions">
+                                            <button class="btn-outline" type="button">Edit</button>
+                                            <form method="post" action="<?= base_url('user/deleteAddress/' . $addr['addressID']) ?>">
+                                                <?= csrf_field() ?>
+                                                <button type="submit" class="btn-outline">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No addresses saved yet.</p>
+                            <?php endif; ?>
                         </div>
-                        <form class="address-form">
+                        <form method="post" action="<?= base_url('user/updateAddress') ?>">
                             <h3>Add New Address</h3>
                             <div class="form-grid">
                                 <div class="input-group">
-                                    <label>Full Name</label>
-                                    <input type="text" name="fullname" placeholder="Fullname">
+                                    <label>Street</label>
+                                    <input type="text" name="street" placeholder="Street">
                                 </div>
                                 <div class="input-group">
-                                    <label>Phone Number</label>
-                                    <input type="text" name="phone" placeholder="Contact Number">
+                                    <label>Barangay</label>
+                                    <input type="text" name="barangay" placeholder="City">
                                 </div>
                                 <div class="input-group">
                                     <label>City</label>

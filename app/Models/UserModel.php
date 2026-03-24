@@ -8,7 +8,6 @@ class UserModel extends Model
 {
     protected $table      = 'user_account';
     protected $primaryKey = 'userID';
-
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $allowedFields    = [
@@ -19,5 +18,6 @@ class UserModel extends Model
         'email',
         'phone_number',
         'password',
+        'birthdate'
     ];
 }

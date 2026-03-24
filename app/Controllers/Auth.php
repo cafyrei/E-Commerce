@@ -44,7 +44,7 @@ class Auth extends BaseController
         $model = new UserModel();
 
         if ($this->request->getMethod() === 'post') {
-            log_message('debug', 'Signup POST received'); // Just for Debug
+            log_message('debug', 'Signup POST received');
             $validationRules = [
                 'first_name' => 'required|min_length[2]',
                 'last_name'  => 'required|min_length[2]',
