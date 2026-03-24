@@ -15,8 +15,8 @@ body {
 .container {
     display: flex;
     padding: 30px;
-    margin-top: 5em;
     gap: 30px;
+    min-height: 200vh;
 }
 
 
@@ -25,6 +25,9 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .scroll-box {

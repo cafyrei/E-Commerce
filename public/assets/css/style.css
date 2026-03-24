@@ -49,6 +49,20 @@ textarea {
 
 textarea {
     height: 80px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    background-color: #fff;
 }
 
 .payment,
@@ -76,10 +90,9 @@ textarea {
     background: #eaeaea;
     padding: 20px;
     border-radius: 15px;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 100%;
 }
 
@@ -96,15 +109,25 @@ textarea {
     background: #ccc;
     border-radius: 8px;
 }
+
 .price {
     margin-left: auto;
 }
 
-.total {
+.qty-controls {
     display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    margin: 15px 0;
+    gap: 5px;
+    align-items: center;
+}
+
+.qty-controls button {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.total-breakdown {
+    margin-top: 15px;
 }
 
 .checkout-btn {
@@ -116,4 +139,5 @@ textarea {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 15px;
 }
