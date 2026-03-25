@@ -69,7 +69,7 @@ if ($user){
     
     <div id="cartItems">
         <?php if (empty($cartItems)): ?>
-            <p>Your cart is empty.</p>
+            <div class="empty-message"><p >Your cart is empty.</p></div>
         <?php else: ?>
             <?php
                 $total = 0;

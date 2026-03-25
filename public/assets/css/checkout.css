@@ -340,3 +340,13 @@ textarea:focus {
     cursor: pointer;
     margin-top: 15px;
 }
+
+.empty-message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-message p {
+  color: #555;
+}

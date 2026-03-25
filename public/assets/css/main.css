@@ -932,3 +932,13 @@ nav img {
   font-size: 1em;
   margin-top: 10px;
 }
+
+.empty-message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-message p {
+  color: #555;
+}

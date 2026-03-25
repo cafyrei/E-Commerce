@@ -359,3 +359,13 @@ nav img {
     cursor: pointer;
     font-weight: bold;
 }
+
+.empty-message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-message p {
+  color: #555;
+}
