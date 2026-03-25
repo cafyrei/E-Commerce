@@ -41,8 +41,6 @@ $routes->post('checkout/process', 'CartController::processCheckout');
 // Removing Product
 $routes->get('cart/remove/(:num)', 'CartController::remove/$1');
 
-$routes->get('catalog', 'Home::productCatalog');
-$routes->get('checkout', 'Home::checkout');
 $routes->get('signup', 'Home::signup');
 $routes->get('home2', 'Home::home2');
 $routes->get('about', 'Home::about');

@@ -82,20 +82,30 @@ if ($user){
                         <img src="<?= base_url('assets/images/product-images/' . $productItem['productImage']) ?>">
                     </div>
                     
-                    <div class="cart-item-details">
-                        <a class="remove-product"href="<?= base_url('cart/remove/' . $productItem['productID'])?>">&#10005;</a>
+                    <div class="cart-item-details"
+                        data-product-id="<?= $productItem['productID'] ?>"
+                        data-stock="<?= $productItem['productStock'] ?>"
+                        data-price="<?= $productItem['productPrice'] ?>">
+
+                        <a class="remove-product"
+                        href="<?= base_url('cart/remove/' . $productItem['productID']) ?>">
+                        &#10005;
+                        </a>
+
                         <p class="product-name"><?= esc($productItem['productName']) ?></p>
                         <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
+
                         <div class="cart-quantity-control">
                             <button type="button" class="cart-minus">-</button>
-                            <span class="cart-qty"><?= $cartItem['quantity'] ?></span>
+                            <span class="cart-qty"><?= $cartItem['quantity']?></span>
                             <button type="button" class="cart-plus">+</button>
-
-                            <div class="cart-item-details"
-                                data-product-id="<?= $productItem['productID'] ?>"
-                                data-stock="<?= $productItem['productStock'] ?>">
-                            </div>
                         </div>
+
+                            <p class="cart-subtotal">
+                            ₱<span class="item-subtotal">
+                                <?= number_format($productItem['productPrice'] * $cartItem['quantity']) ?>
+                            </span>
+                        </p>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -120,7 +130,7 @@ if ($user){
 
             <div class="total">
                 <span>Total</span>
-                <span>₱<?= number_format($total) ?></span>
+                <span>₱<span id="cartTotal"><?= number_format($total) ?></span></span>
             </div>
             <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
         <?php endif; ?>
@@ -142,19 +152,46 @@ window.addEventListener('click', (e) => {
     }
 });
 
+// 🔥 UPDATE TOTAL FUNCTION
+function updateCartTotal() {
+    let total = 0;
+
+    document.querySelectorAll(".cart-item-details").forEach(item => {
+        const price = parseFloat(item.dataset.price);
+        const qty = parseInt(item.querySelector(".cart-qty").textContent);
+
+        total += price * qty;
+    });
+
+    document.getElementById("cartTotal").textContent = total.toLocaleString();
+}
+
+// 🔥 PER ITEM LOGIC
 document.querySelectorAll(".cart-item-details").forEach(item => {
     const minusBtn = item.querySelector(".cart-minus");
     const plusBtn = item.querySelector(".cart-plus");
     const qtySpan = item.querySelector(".cart-qty");
+    const subtotalSpan = item.querySelector(".item-subtotal");
+
+    if (!minusBtn || !plusBtn || !qtySpan || !subtotalSpan) return;
 
     let count = parseInt(qtySpan.textContent);
-    const maxStock = parseInt(item.dataset.stock);
+    const maxStock = parseInt(item.dataset.stock) || 1;
+    const price = parseFloat(item.dataset.price);
 
     function updateUI() {
+        // update quantity
         qtySpan.textContent = count;
 
+        // 🔥 update subtotal
+        subtotalSpan.textContent = (price * count).toLocaleString();
+
+        // disable buttons
         minusBtn.disabled = count <= 1;
         plusBtn.disabled = count >= maxStock;
+
+        // 🔥 update total
+        updateCartTotal();
     }
 
     plusBtn.addEventListener("click", () => {
