@@ -58,7 +58,7 @@ if ($user){
         <button id="cartBtn" class="cart-btn">
             <img src="<?= base_url("assets/images/social-icons/main-icons/shopping-cart.png") ?>" alt="Cart">
         </button>
-    </div>
+    </div> 
 
     <!-- CART PANEL -->
 <div id="cartPanel" class="cart-panel">
