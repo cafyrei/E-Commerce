@@ -20,7 +20,7 @@
 
         <section class="full-hero-container">
             <div class="full-hero-image">
-                <img src="Images/Background2.jpg" alt="Our Workshop" class="story-img-left">
+                <img src="<?= base_url('assets/images/about-Images/Background2.jpg') ?>" alt="Our Workshop" class="story-img-left">
                 <h1 class="hero-title">Artisan Woodworks</h1>
             </div>
 
@@ -53,7 +53,7 @@
 
                     <div class="team-card">
                         <div class="member-image">
-                            <img src="Images/team1.jpg" alt="Allen Alcabaza">
+                            <img src="<?= base_url('assets/images/artisan-images/allen.jpg') ?>" alt="Allen Alcabaza">
                         </div>
                         <div class="member-info">
                             <h3>Allen Alcabaza</h3>
@@ -111,7 +111,7 @@
 
             <div class="story-block reverse">
                 <div class="story-image">
-                    <img src="Images/Background1.jpg" alt="Handcrafted Detail">
+                    <img src="<?= base_url('assets/images/about-Images/Background1.jpg') ?>" alt="Handcrafted Detail">
                 </div>
                 <div class="story-text">
                     <p>
@@ -125,7 +125,7 @@
 
             <div class="story-block">
                 <div class="story-image">
-                    <img src="Images/Background3.jpg" alt="Finished Furniture">
+                    <img src="<?= base_url('assets/images/about-Images/Background3.jpg') ?>" alt="Finished Furniture">
                 </div>
                 <div class="story-text">
                     <p>
