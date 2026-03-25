@@ -36,6 +36,7 @@ $routes->post('cart/add', 'CartController::add');
 // Buying Product
 $routes->post('buy-now', 'CartController::buyNow');
 $routes->get('checkout', 'CartController::checkout');
+$routes->post('checkout', 'CartController::checkout');
 $routes->post('checkout/process', 'CartController::processCheckout');
 
 // Removing Product

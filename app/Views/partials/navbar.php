@@ -117,6 +117,7 @@ if ($user){
     <!-- CART SUMMARY -->
     <div class="cart-summary">
         <?php if (!empty($cartItems)): ?>
+            <form action="<?= base_url('checkout') ?>" method="post">
             <div class="items">
                 <?php foreach ($cartItems as $cartItem):
                     $productItem = $productModel->find($cartItem['productID']);
@@ -132,8 +133,9 @@ if ($user){
                 <span>Total</span>
                 <span>₱<span id="cartTotal"><?= number_format($total) ?></span></span>
             </div>
-            <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
+            <a href="<?= base_url('checkout') ?>"><button type="submit" class="checkout-btn">Proceed to Checkout</button></a>
         <?php endif; ?>
+        </form>
     </div>
 </div>
 </nav>
@@ -152,7 +154,6 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// 🔥 UPDATE TOTAL FUNCTION
 function updateCartTotal() {
     let total = 0;
 
@@ -166,7 +167,6 @@ function updateCartTotal() {
     document.getElementById("cartTotal").textContent = total.toLocaleString();
 }
 
-// 🔥 PER ITEM LOGIC
 document.querySelectorAll(".cart-item-details").forEach(item => {
     const minusBtn = item.querySelector(".cart-minus");
     const plusBtn = item.querySelector(".cart-plus");
@@ -180,17 +180,13 @@ document.querySelectorAll(".cart-item-details").forEach(item => {
     const price = parseFloat(item.dataset.price);
 
     function updateUI() {
-        // update quantity
         qtySpan.textContent = count;
 
-        // 🔥 update subtotal
         subtotalSpan.textContent = (price * count).toLocaleString();
 
-        // disable buttons
         minusBtn.disabled = count <= 1;
         plusBtn.disabled = count >= maxStock;
 
-        // 🔥 update total
         updateCartTotal();
     }
 
