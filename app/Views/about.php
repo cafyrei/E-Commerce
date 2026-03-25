@@ -63,30 +63,30 @@
                                 </div>
                                 <div class="member-info">
                                     <h3>Allen Alcabaza</h3>
-                                    <span class="role">Placeholder</span>
-                                    <p>Placeholder</p>
+                                    <span class="role">Developer</span>
+                                    <p>BSIT AGD</p>
                                 </div>
                             </div>
 
                             <div class="team-card">
                                 <div class="member-image">
-                                    <img src="Images/team2.jpg" alt="James Manzano">
+                                    <img src="<?= base_url('assets/images/artisan-images/mazano.png') ?>" alt="James Manzano">
                                 </div>
                                 <div class="member-info">
                                     <h3>James Manzano</h3>
-                                    <span class="role">Placeholder</span>
-                                    <p>Placeholder</p>
+                                    <span class="role">Developer</span>
+                                    <p>BSIT AGD</p>
                                 </div>
                             </div>
 
                             <div class="team-card">
                                 <div class="member-image">
-                                    <img src="Images/team3.jpg" alt="Sean Nieves">
+                                    <img src="<?= base_url('assets/images/artisan-images/sean.jpg') ?>" alt="Sean Nieves">
                                 </div>
                                 <div class="member-info">
                                     <h3>Sean Nieves</h3>
-                                    <span class="role">Placeholder</span>
-                                    <p>Placeholder</p>
+                                    <span class="role">Developer</span>
+                                    <p>BSIT AGD</p>
                                 </div>
                             </div>
 
@@ -96,19 +96,19 @@
                                 </div>
                                 <div class="member-info">
                                     <h3>Rovic Sarthou</h3>
-                                    <span class="role">Placeholder</span>
-                                    <p>Placeholder</p>
+                                    <span class="role">Developer</span>
+                                    <p>BSIT AGD</p>
                                 </div>
                             </div>
 
                             <div class="team-card">
                                 <div class="member-image">
-                                    <img src="Images/team5.jpg" alt="Miggy Valmonte">
+                                    <img src="<?= base_url('assets/images/artisan-images/miggy.jpg') ?>" alt="Miggy Valmonte">
                                 </div>
                                 <div class="member-info">
                                     <h3>Miggy Valmonte</h3>
-                                    <span class="role">Placeholder</span>
-                                    <p>Placeholder</p>
+                                    <span class="role">Developer</span>
+                                    <p>BSIT AGD</p>
                                 </div>
                             </div>
 
