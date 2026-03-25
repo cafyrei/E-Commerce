@@ -30,7 +30,7 @@ if ($sess->has('user_id')) {
             <span>Built to last.</span>
         </h1>
         <p>Handmade wooden furniture and pieces shaped by time, grain, and care.</p>
-        <a href="<?= base_url('home2') ?>" class="small-btn">Show more</a>
+        <a href="<?= base_url('catalog') ?>" class="small-btn">Shop Now!</a>
     </header>
 
     <div class="home2-container">
@@ -41,22 +41,22 @@ if ($sess->has('user_id')) {
                 <div class="promise-card">
                     <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-2.jpg') ?>" alt="" srcset=""></div>
                     <div class="content">
-                        <h3>Handcrafted Excellence</h3>
-                        <p>Each piece is carefully handmade by skilled artisans, ensuring every detail reflects quality, precision, and passion for the craft.</p>
+                        <h3>Header</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
                     </div>
                 </div>
                 <div class="promise-card">
-                    <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-6.jpg') ?>" alt="" srcset=""></div></div>
+                    <div class="placeholder-box">Image</div>
                     <div class="content">
-                        <h3>Sustainably Sourced Wood</h3>
-                        <p>We use responsibly sourced materials to create furniture that not only looks beautiful but also respects nature and the environment.</p>
+                        <h3>Header</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
                     </div>
                 </div>
                 <div class="promise-card">
-                    <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-7.jpg') ?>" alt="" srcset=""></div></div>
+                    <div class="placeholder-box">Image</div>
                     <div class="content">
-                        <h3>Built to Last</h3>
-                        <p>Our furniture is designed for durability, combining timeless design with strong materials that stand the test of time.</p>
+                        <h3>Header</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
                     </div>
                 </div>
             </div>
@@ -69,24 +69,24 @@ if ($sess->has('user_id')) {
             <h2 class="section-title">Featured Works</h2>
             <div class="featured-main-grid">
                 <div class="feat-box large">
-                    <div class="img-area"><img src="<?= base_url('assets/images/featured-photos/Heritage-Table.jpg') ?>" alt="" srcset=""></div></div>
+                    <div class="img-area">Image</div>
                     <div class="feat-footer">
                         <div>
-                            <h2>The Heritage Table</h2>
-                            <p>A centerpiece crafted from solid oak, blending traditional woodworking with modern elegance.</p>
+                            <h2>Header</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
-                        <a href="#" class="small-btn">Shop now</a>
+                        <a href="<?= base_url('catalog') ?>" class="small-btn">Shop now</a>
                     </div>
                 </div>
                 <div class="feat-box">
-                    <div class="img-area"><img src="<?= base_url('assets/images/featured-photos/Rustic-Coffee-Table.jpg') ?>" alt="" srcset=""></div></div>
-                    <h2>Rustic Coffee Table</h2>
-                    <p>Perfect for cozy spaces, designed with natural textures and a warm finish.</p>
+                    <div class="img-area">Image</div> 
+                    <h2>Header</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="feat-box">
-                    <div class="img-area"><img src="<?= base_url('assets/images/featured-photos/Minimalist-Shelf.jpg') ?>" alt="" srcset=""></div></div>
-                    <h2>Minimalist Shelf</h2>
-                    <p>Clean lines and sturdy build, ideal for modern interiors and functional storage.</p>
+                    <div class="img-area">Image</div>
+                    <h2>Header</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
             </div>
         </section>
@@ -95,8 +95,8 @@ if ($sess->has('user_id')) {
     <div class="home2-container">
         <section class="custom-project-box">
             <div class="custom-content">
-                <h3>Custom Furniture, Made for You</h3>
-                <p>Have a vision in mind? We bring your ideas to life with fully customizable wooden furniture tailored to your space, style, and needs.</p>
+                <h3>Header</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                 <div class="btn-group">
                     <a href="#" class="small-btn outline">Learn More &rarr;</a>
                     <a href="#" class="small-btn outline">Contact Us</a>
