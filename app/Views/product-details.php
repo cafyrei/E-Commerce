@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('assets/css/product-details.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
     <title><?= esc($product['productName']) ?></title>
 </head>
 
