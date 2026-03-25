@@ -12,29 +12,33 @@ class Auth extends BaseController
         $model = new UserModel();
 
         if ($this->request->getMethod() === 'post') {
-
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
+            $validation = \Config\Services::validation();
+
             $user = $model->where('email', $email)->first();
 
-            if ($user) {
-                if (password_verify($password, $user['password'])) {
-
-                    session()->set([
-                        'user_id' => $user['userID'],
-                        'email'   => $user['email'],
-                        'logged_in' => true
-                    ]);
-
-                    return redirect()->to('/');
-                } else {
-                    return redirect()->back()->with('error', 'Wrong password');
-                }
-            } else {
-                return redirect()->back()->with('error', 'Email not found');
+            if (!$user) {
+                $validation->setError('email', 'This email is not registered.');
+                return view('auth/login', ['validation' => $validation]);
             }
+
+            if (!password_verify($password, $user['password'])) {
+                $validation->setError('password', 'Incorrect password. Please try again.');
+                return view('auth/login', ['validation' => $validation]);
+            }
+
+            // If successful
+            session()->set([
+                'user_id' => $user['userID'],
+                'email'   => $user['email'],
+                'logged_in' => true
+            ]);
+
+            return redirect()->to('/');
         }
+
         return view('auth/login');
     }
 
@@ -50,7 +54,13 @@ class Auth extends BaseController
                 'last_name'  => 'required|min_length[2]',
                 'email'      => 'required|valid_email|is_unique[user_account.email]',
                 'password'   => 'required|min_length[6]',
-                'confirm_password' => 'required|matches[password]',
+                'confirm_password' => [
+                    'rules' => 'required|matches[password]',
+                    'errors' => [
+                        'required' => 'Please confirm your password',
+                        'matches' => 'Password did not match'
+                    ]
+                ]
             ];
 
             if (!$this->validate($validationRules)) {
