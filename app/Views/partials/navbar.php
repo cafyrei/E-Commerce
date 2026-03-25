@@ -113,9 +113,9 @@ if ($user){
                 <span>Total</span>
                 <span>₱<?= number_format($total) ?></span>
             </div>
+            <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
         <?php endif; ?>
 
-        <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
     </div>
 </div>
 </nav>

@@ -9,7 +9,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/about.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
 </head>
 
 <body>
