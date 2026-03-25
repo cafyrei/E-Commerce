@@ -45,6 +45,7 @@ body {
 .user-greetings {
   font-weight: bold;
   font-size: 2rem;
+  color: white;
 }
 
 .hero h1 {

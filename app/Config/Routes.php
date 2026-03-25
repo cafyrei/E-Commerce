@@ -33,6 +33,14 @@ $routes->get('product-details/(:num)', 'Home::productDetails/$1');
 // Adding Cart
 $routes->post('cart/add', 'CartController::add');
 
+// Buying Product
+$routes->post('buy-now', 'CartController::buyNow');
+$routes->get('checkout', 'CartController::checkout');
+$routes->post('checkout/process', 'CartController::processCheckout');
+
+// Removing Product
+$routes->get('cart/remove/(:num)', 'CartController::remove/$1');
+
 $routes->get('catalog', 'Home::productCatalog');
 $routes->get('checkout', 'Home::checkout');
 $routes->get('signup', 'Home::signup');

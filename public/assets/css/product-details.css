@@ -369,3 +369,29 @@ nav img {
 .empty-message p {
   color: #555;
 }
+
+.remove-product {
+  text-decoration: none;
+  color: var(--text);
+  align-self: flex-end;
+}
+
+.cart-quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.cart-quantity-control button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.cart-quantity-control span {
+  min-width: 20px;
+  text-align: center;
+}

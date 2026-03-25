@@ -26,7 +26,7 @@ $nav_theme = 'dark';
                 <div class="side-item-box active" data-target="account-content">My Account</div>
                 <div class="side-item-box" data-target="orders-content">My Orders</div>
                 <div class="side-item-box" data-target="favorites-content">My Favorites</div>
-                <div class="side-item-box logout">Sign Out</div>
+                <div class="side-item-box logout" onclick="window.location.href='<?= base_url('logout') ?>'">Sign Out</div>
             </div>
         </aside>
 
@@ -35,7 +35,6 @@ $nav_theme = 'dark';
 
             <!-- ACCOUNT TAB -->
             <div class="tab-content" id="account-content">
-                <!-- HEADER -->
                 <div class="profile-header-meta">
                     <h2>Personal Data</h2>
                     <p>Manage your information to make checkout faster and easier.</p>
@@ -48,13 +47,13 @@ $nav_theme = 'dark';
                         <span class="arrow">▶</span>
                     </div>
                     <div class="accordion-content">
-                        <!-- PROFILE UPLOAD AREA -->
                         <div class="profile-upload-area">
                             <div class="avatar-large">A</div>
                             <button class="btn-outline">Edit Photo</button>
                         </div>
 
                         <form method="post" action="<?= base_url('updateProfile') ?>">
+                            <?= csrf_field() ?>
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>First Name</label>
@@ -78,7 +77,7 @@ $nav_theme = 'dark';
                                 </div>
                                 <div class="input-group">
                                     <label>Birthdate</label>
-                                    <input type="date" name="birthdate">
+                                    <input type="date" name="birthdate" value="<?= esc($user['birthdate'] ?? '') ?>">
                                 </div>
                                 <div class="input-group">
                                     <label>Country</label>
@@ -105,6 +104,7 @@ $nav_theme = 'dark';
                     </div>
                     <div class="accordion-content">
                         <form method="post" action="<?= base_url('user/updatePassword') ?>">
+                            <?= csrf_field() ?>
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Current Password</label>
@@ -138,11 +138,10 @@ $nav_theme = 'dark';
                             <?php if (!empty($addresses)): ?>
                                 <?php foreach ($addresses as $addr): ?>
                                     <div class="address-card">
-                                        <h4><?= esc($addr['label'] ?? 'Address') ?></h4>
+                                        <h4>Saved Address</h4>
                                         <p><?= esc($addr['street']) ?></p>
                                         <p><?= esc($addr['city']) ?>, <?= esc($addr['state']) ?> <?= esc($addr['zip']) ?></p>
                                         <div class="address-actions">
-                                            <button class="btn-outline" type="button">Edit</button>
                                             <form method="post" action="<?= base_url('user/deleteAddress/' . $addr['addressID']) ?>">
                                                 <?= csrf_field() ?>
                                                 <button type="submit" class="btn-outline">Delete</button>
@@ -154,40 +153,35 @@ $nav_theme = 'dark';
                                 <p>No addresses saved yet.</p>
                             <?php endif; ?>
                         </div>
+
                         <form method="post" action="<?= base_url('user/updateAddress') ?>">
-                            <h3>Add New Address</h3>
+                            <?= csrf_field() ?>
+                            <h3>Add / Update Address</h3>
+
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Street</label>
-                                    <input type="text" name="street" placeholder="Street">
+                                    <input type="text" name="street" placeholder="Street" required>
                                 </div>
-                                <div class="input-group">
-                                    <label>Barangay</label>
-                                    <input type="text" name="barangay" placeholder="City">
-                                </div>
+
                                 <div class="input-group">
                                     <label>City</label>
-                                    <input type="text" name="city" placeholder="City">
+                                    <input type="text" name="city" placeholder="City" required>
                                 </div>
+
                                 <div class="input-group">
-                                    <label>Province</label>
-                                    <input type="text" name="province" placeholder="Province">
+                                    <label>State / Province</label>
+                                    <input type="text" name="state" placeholder="State / Province" required>
                                 </div>
+
                                 <div class="input-group">
-                                    <label>Postal Code</label>
-                                    <input type="text" name="postal" placeholder="Postal Code">
-                                </div>
-                                <div class="input-group">
-                                    <label>Label (Home, Work)</label>
-                                    <input type="text" name="label" placeholder="Label">
+                                    <label>ZIP Code</label>
+                                    <input type="text" name="zip" placeholder="ZIP Code" required>
                                 </div>
                             </div>
-                            <div class="input-group" style="margin-top:15px;">
-                                <label>Full Address</label>
-                                <input type="text" name="address" placeholder="Full Address">
-                            </div>
+
                             <div class="form-actions">
-                                <button type="submit" class="btn-save">Add Address</button>
+                                <button type="submit" class="btn-save">Save Address</button>
                             </div>
                         </form>
                     </div>
@@ -200,6 +194,54 @@ $nav_theme = 'dark';
                     <h2>Order History</h2>
                     <p>Your previous orders will be listed here.</p>
                 </div>
+
+                <?php if (!empty($orders)): ?>
+                    <?php foreach ($orders as $order): ?>
+                        <div class="accordion-section active" style="margin-bottom:20px;">
+                            <div class="accordion-header">
+                                <span>Order #<?= esc($order['orderID']) ?> - <?= esc($order['status']) ?></span>
+                                <span class="arrow">▶</span>
+                            </div>
+
+                            <div class="accordion-content" style="display:block;">
+                                <p><strong>Payment:</strong> <?= esc($order['paymentMethod']) ?></p>
+                                <p><strong>Shipping:</strong> <?= esc($order['shippingMethod']) ?> (₱<?= number_format($order['shippingCost'], 2) ?>)</p>
+                                <p><strong>Total:</strong> ₱<?= number_format($order['totalAmount'], 2) ?></p>
+
+                                <hr style="margin:15px 0;">
+
+                                <?php if (!empty($order['items'])): ?>
+                                    <?php foreach ($order['items'] as $item): ?>
+                                        <?php if (!empty($item['product'])): ?>
+                                            <div class="order-item" style="display:flex; gap:20px; align-items:center; margin-bottom:20px;">
+                                                <div class="order-item-img">
+                                                    <img src="<?= base_url('assets/images/product-images/' . $item['product']['productImage']) ?>"
+                                                         alt="<?= esc($item['product']['productName']) ?>"
+                                                         style="width:120px; height:120px; object-fit:cover; border-radius:8px;">
+                                                </div>
+
+                                                <div class="order-item-details">
+                                                    <p><strong><?= esc($item['product']['productName']) ?></strong></p>
+                                                    <p>₱<?= number_format($item['product']['productPrice'], 2) ?></p>
+                                                    <p>Qty: <?= esc($item['quantity']) ?></p>
+                                                    <p>Subtotal: ₱<?= number_format($item['subTotal'], 2) ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>No items found for this order.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="accordion-section active">
+                        <div class="accordion-content" style="display:block;">
+                            <p>No orders yet.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- FAVORITES TAB -->
@@ -212,43 +254,35 @@ $nav_theme = 'dark';
 
         </div>
     </div>
-</body>
 
-<!-- JS -->
-<script>
-    const headers = document.querySelectorAll('.accordion-header');
+    <script>
+        const headers = document.querySelectorAll('.accordion-header');
 
-    headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const section = header.parentElement;
-            document.querySelectorAll('.accordion-section').forEach(s => {
-                if (s !== section) s.classList.remove('active');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('active');
             });
-
-            section.classList.toggle('active');
         });
-    });
 
-    const sidebarItems = document.querySelectorAll('.side-item-box');
-    const tabContents = document.querySelectorAll('.tab-content');
+        const sidebarItems = document.querySelectorAll('.side-item-box');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-    sidebarItems.forEach(item => {
-        item.addEventListener('click', () => {
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', () => {
 
-            if (item.classList.contains('logout')) return;
+                if (item.classList.contains('logout')) return;
 
-            sidebarItems.forEach(i => i.classList.remove('active'));
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
 
-            item.classList.add('active');
+                tabContents.forEach(tab => tab.style.display = 'none');
 
-            tabContents.forEach(tab => tab.style.display = 'none');
-
-            const target = document.getElementById(item.dataset.target);
-            if (target) target.style.display = 'block';
+                const target = document.getElementById(item.dataset.target);
+                if (target) target.style.display = 'block';
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
-
 </html>

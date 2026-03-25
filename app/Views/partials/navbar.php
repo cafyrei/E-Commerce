@@ -58,8 +58,7 @@ if ($user){
         <button id="cartBtn" class="cart-btn">
             <img src="<?= base_url("assets/images/social-icons/main-icons/shopping-cart.png") ?>" alt="Cart">
         </button>
-    </div> 
-
+    </div>
     <!-- CART PANEL -->
 <div id="cartPanel" class="cart-panel">
     <div class="cart-top">
@@ -69,7 +68,7 @@ if ($user){
     
     <div id="cartItems">
         <?php if (empty($cartItems)): ?>
-            <div class="empty-message"><p >Your cart is empty.</p></div>
+            <p>Your cart is empty.</p>
         <?php else: ?>
             <?php
                 $total = 0;
@@ -84,9 +83,19 @@ if ($user){
                     </div>
                     
                     <div class="cart-item-details">
+                        <a class="remove-product"href="<?= base_url('cart/remove/' . $productItem['productID'])?>">&#10005;</a>
                         <p class="product-name"><?= esc($productItem['productName']) ?></p>
                         <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
-                        <small>Qty: <?= $cartItem['quantity'] ?></small>
+                        <div class="cart-quantity-control">
+                            <button type="button" class="cart-minus">-</button>
+                            <span class="cart-qty"><?= $cartItem['quantity'] ?></span>
+                            <button type="button" class="cart-plus">+</button>
+
+                            <div class="cart-item-details"
+                                data-product-id="<?= $productItem['productID'] ?>"
+                                data-stock="<?= $productItem['productStock'] ?>">
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -115,7 +124,6 @@ if ($user){
             </div>
             <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
         <?php endif; ?>
-
     </div>
 </div>
 </nav>
@@ -132,5 +140,37 @@ window.addEventListener('click', (e) => {
     if (!cartPanel.contains(e.target) && !cartBtn.contains(e.target)) {
         cartPanel.classList.remove('active');
     }
+});
+
+document.querySelectorAll(".cart-item-details").forEach(item => {
+    const minusBtn = item.querySelector(".cart-minus");
+    const plusBtn = item.querySelector(".cart-plus");
+    const qtySpan = item.querySelector(".cart-qty");
+
+    let count = parseInt(qtySpan.textContent);
+    const maxStock = parseInt(item.dataset.stock);
+
+    function updateUI() {
+        qtySpan.textContent = count;
+
+        minusBtn.disabled = count <= 1;
+        plusBtn.disabled = count >= maxStock;
+    }
+
+    plusBtn.addEventListener("click", () => {
+        if (count < maxStock) {
+            count++;
+            updateUI();
+        }
+    });
+
+    minusBtn.addEventListener("click", () => {
+        if (count > 1) {
+            count--;
+            updateUI();
+        }
+    });
+
+    updateUI();
 });
 </script>
