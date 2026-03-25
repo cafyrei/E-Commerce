@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\UserModel;
 use App\Models\CartModel;
 use App\Models\CartItemModel;
@@ -14,7 +15,7 @@ if ($sess->has('user_id')) {
     $user = $model->find($sess->get('user_id'));
 }
 
-if ($user){
+if ($user) {
     $cartModel = new CartModel();
     $cartItemModel = new CartItemModel();
     $productModel = new ProductModel();
@@ -58,79 +59,84 @@ if ($user){
         <button id="cartBtn" class="cart-btn">
             <img src="<?= base_url("assets/images/social-icons/main-icons/shopping-cart.png") ?>" alt="Cart">
         </button>
-    </div> 
+    </div>
 
     <!-- CART PANEL -->
-<div id="cartPanel" class="cart-panel">
-    <div class="cart-top">
-        <h1>Your Cart</h1>
-        <h2><?= esc(count($cartItems)) ?> items</h2>
-    </div>
-    
-    <div id="cartItems">
-        <?php if (empty($cartItems)): ?>
-            <p>Your cart is empty.</p>
-        <?php else: ?>
-            <?php
+    <div id="cartPanel" class="cart-panel">
+        <div class="cart-top">
+            <h1>Your Cart</h1>
+            <h2><?= esc(count($cartItems)) ?> items</h2>
+        </div>
+
+        <div id="cartItems">
+            <?php if (empty($cartItems)): ?>
+                <p>Your cart is empty.</p>
+            <?php else: ?>
+                <?php
                 $total = 0;
                 foreach ($cartItems as $cartItem):
                     $productItem = $productModel->find($cartItem['productID']);
                     $subtotal = $productItem['productPrice'] * $cartItem['quantity'];
                     $total += $subtotal;
-            ?>
-                <div class="cart-item">
-                    <div class="cart-item-img">
-                        <img src="<?= base_url('assets/images/product-images/' . $productItem['productImage']) ?>">
-                    </div>
-                    
-                    <div class="cart-item-details">
-                        <p class="product-name"><?= esc($productItem['productName']) ?></p>
-                        <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
-                        <small>Qty: <?= $cartItem['quantity'] ?></small>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-
-    <hr>
-
-    <!-- CART SUMMARY -->
-    <div class="cart-summary">
-        <?php if (!empty($cartItems)): ?>
-            <div class="items">
-                <?php foreach ($cartItems as $cartItem):
-                    $productItem = $productModel->find($cartItem['productID']);
                 ?>
-                    <div class="item">
-                        <span><?= esc($productItem['productName']) ?></span>
-                        <span>₱<?= number_format($productItem['productPrice'] * $cartItem['quantity']) ?></span>
+                    <div class="cart-item">
+                        <div class="cart-item-img">
+                            <img src="<?= base_url('assets/images/product-images/' . $productItem['productImage']) ?>">
+                        </div>
+
+                        <div class="cart-item-details">
+                            <p class="product-name"><?= esc($productItem['productName']) ?></p>
+                            <p class="product-price">₱<?= number_format($productItem['productPrice']) ?></p>
+                            <small>Qty: <?= $cartItem['quantity'] ?></small>
+                        </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
+            <?php endif; ?>
+        </div>
 
-            <div class="total">
-                <span>Total</span>
-                <span>₱<?= number_format($total) ?></span>
-            </div>
-        <?php endif; ?>
+        <hr>
 
-        <a href="<?= base_url('checkout') ?>"><button class="checkout-btn">Proceed to Checkout</button></a>
-    </div>
-</div>
+        <!-- CART SUMMARY -->
+        <div class="cart-summary">
+            <?php if (!empty($cartItems)): ?>
+                <div class="items">
+                    <?php foreach ($cartItems as $cartItem):
+                        $productItem = $productModel->find($cartItem['productID']);
+                    ?>
+                        <div class="item">
+                            <span><?= esc($productItem['productName']) ?></span>
+                            <span>₱<?= number_format($productItem['productPrice'] * $cartItem['quantity']) ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="total">
+                    <span>Total</span>
+                    <span>₱<?= number_format($total) ?></span>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($cartItems)): ?>
+                <a href="<?= base_url('checkout') ?>">
+                    <button class="checkout-btn">
+                        Proceed to Checkout
+                    </button>
+                </a>
+            <?php endif; ?>
+        </div>
 </nav>
 
 <script>
-const cartBtn = document.getElementById('cartBtn');
-const cartPanel = document.getElementById('cartPanel');
+    const cartBtn = document.getElementById('cartBtn');
+    const cartPanel = document.getElementById('cartPanel');
 
-cartBtn.addEventListener('click', () => {
-    cartPanel.classList.add('active');
-});
+    cartBtn.addEventListener('click', () => {
+        cartPanel.classList.add('active');
+    });
 
-window.addEventListener('click', (e) => {
-    if (!cartPanel.contains(e.target) && !cartBtn.contains(e.target)) {
-        cartPanel.classList.remove('active');
-    }
-});
+    window.addEventListener('click', (e) => {
+        if (!cartPanel.contains(e.target) && !cartBtn.contains(e.target)) {
+            cartPanel.classList.remove('active');
+        }
+    });
 </script>
