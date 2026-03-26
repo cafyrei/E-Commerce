@@ -24,6 +24,7 @@ $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artisan Furniture | Product Catalog</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/catalog-modern.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
 </head>
 <body>
 
