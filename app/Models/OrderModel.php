@@ -8,13 +8,17 @@ class OrderModel extends Model
 {
     protected $table      = 'orders';
     protected $primaryKey = 'orderID';
+    protected $useAutoIncrement = true;
+    protected $returnType = 'array';
     protected $allowedFields    = [
 
         'userID',
         'addressID',
         'totalAmount',
         'orderDate',
-        'status',
-
+        'shippingMethod',
+        'shippingCost',
+        'paymentMethod',
+        'status'
     ];
 }
