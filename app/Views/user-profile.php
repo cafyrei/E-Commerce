@@ -214,6 +214,54 @@ $nav_theme = 'dark';
                     <h2>Order History</h2>
                     <p>Your previous orders will be listed here.</p>
                 </div>
+
+                <?php if (!empty($orders)): ?>
+                    <?php foreach ($orders as $order): ?>
+                        <div class="accordion-section active" style="margin-bottom:20px;">
+                            <div class="accordion-header">
+                                <span>Order #<?= esc($order['orderID']) ?> - <?= esc($order['status']) ?></span>
+                                <span class="arrow">▶</span>
+                            </div>
+
+                            <div class="accordion-content" style="display:block;">
+                                <p><strong>Payment:</strong> <?= esc($order['paymentMethod']) ?></p>
+                                <p><strong>Shipping:</strong> <?= esc($order['shippingMethod']) ?> (₱<?= number_format($order['shippingCost'], 2) ?>)</p>
+                                <p><strong>Total:</strong> ₱<?= number_format($order['totalAmount'], 2) ?></p>
+
+                                <hr style="margin:15px 0;">
+
+                                <?php if (!empty($order['items'])): ?>
+                                    <?php foreach ($order['items'] as $item): ?>
+                                        <?php if (!empty($item['product'])): ?>
+                                            <div class="order-item" style="display:flex; gap:20px; align-items:center; margin-bottom:20px;">
+                                                <div class="order-item-img">
+                                                    <img src="<?= base_url('assets/images/product-images/' . $item['product']['productImage']) ?>"
+                                                         alt="<?= esc($item['product']['productName']) ?>"
+                                                         style="width:120px; height:120px; object-fit:cover; border-radius:8px;">
+                                                </div>
+
+                                                <div class="order-item-details">
+                                                    <p><strong><?= esc($item['product']['productName']) ?></strong></p>
+                                                    <p>₱<?= number_format($item['product']['productPrice'], 2) ?></p>
+                                                    <p>Qty: <?= esc($item['quantity']) ?></p>
+                                                    <p>Subtotal: ₱<?= number_format($item['subTotal'], 2) ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>No items found for this order.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="accordion-section active">
+                        <div class="accordion-content" style="display:block;">
+                            <p>No orders yet.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- FAVORITES TAB -->
