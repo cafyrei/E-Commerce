@@ -27,33 +27,16 @@ $routes->get('catalog', 'Catalog::index');
 
 // Admin
 $routes->get('admin', 'Admin\Admin::index');
+$routes->get('admin', 'Admin\Admin::index');
 $routes->get('admin/deleteUser/(:num)', 'Admin\Admin::deleteUser/$1');
 $routes->get('admin/deleteProduct/(:num)', 'Admin\Admin::deleteProduct/$1');
 
 // Product Details
 $routes->get('product-details/(:num)', 'Home::productDetails/$1');
 
-// Adding Cart
+// Cart and Checkout
 $routes->post('cart/add', 'CartController::add');
-
-// Proceeding to Checkout
+$routes->post('cart/update-quantity', 'CartController::updateQuantity');
 $routes->get('checkout', 'CartController::checkout');
-
-// Checkout with a specific product
 $routes->post('buy-now', 'CartController::buyNow');
-
-// Process of making the order
 $routes->post('checkout/process', 'CartController::processCheckout');
-
-
-
-
-
-
-
-
-// OMITTED
-$routes->get('admin_signin', 'Home::adminSignin'); // admin
-$routes->get('contact', 'Home::contact');
-$routes->get('signup', 'Home::signup');
-$routes->get('home2', 'Home::home2');

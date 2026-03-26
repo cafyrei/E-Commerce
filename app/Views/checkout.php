@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\UserModel;
 use App\Models\AddressModel;
 
@@ -54,27 +55,29 @@ $total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/checkout.css') ?>">
 </head>
+
 <body>
     <?php include 'partials/navbar.php'; ?>
 
     <div class="container">
         <div class="checkout-left">
-        <div class="tabs">
-            <a href="?tab=customer&payment=<?= urlencode($selectedPayment) ?>&shipping=<?= urlencode($selectedShipping) ?>&address=<?= urlencode($address) ?>"
-               class="<?= ($active == 'customer') ? 'active' : '' ?>">
-                Customer Information
-            </a>
+            <div class="tabs">
+                <a href="?tab=customer&payment=<?= urlencode($selectedPayment) ?>&shipping=<?= urlencode($selectedShipping) ?>&address=<?= urlencode($address) ?>"
+                    class="<?= ($active == 'customer') ? 'active' : '' ?>">
+                    Customer Information
+                </a>
 
-            <a href="?tab=shipping&payment=<?= urlencode($selectedPayment) ?>&shipping=<?= urlencode($selectedShipping) ?>&address=<?= urlencode($address) ?>"
-               class="<?= ($active == 'shipping') ? 'active' : '' ?>">
-                Shipping Method
-            </a>
-        </div>
+                <a href="?tab=shipping&payment=<?= urlencode($selectedPayment) ?>&shipping=<?= urlencode($selectedShipping) ?>&address=<?= urlencode($address) ?>"
+                    class="<?= ($active == 'shipping') ? 'active' : '' ?>">
+                    Shipping Method
+                </a>
+            </div>
 
             <?php if ($active == "customer"): ?>
                 <div class="section">
@@ -105,32 +108,32 @@ $total = 0;
                         <?php endforeach; ?>
                     </form>
                 </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
-        <?php if ($active == "shipping"): ?>
-            <div class="section">
+            <?php if ($active == "shipping"): ?>
+                <div class="section">
 
-                <h3>Select Shipping Method</h3>
+                    <h3>Select Shipping Method</h3>
 
-                <form method="GET">
-                    <input type="hidden" name="tab" value="shipping">
-                    <input type="hidden" name="payment" value="<?= esc($selectedPayment) ?>">
-                    <input type="hidden" name="address" value="<?= esc($address) ?>">
+                    <form method="GET">
+                        <input type="hidden" name="tab" value="shipping">
+                        <input type="hidden" name="payment" value="<?= esc($selectedPayment) ?>">
+                        <input type="hidden" name="address" value="<?= esc($address) ?>">
 
-                    <?php foreach ($shippingNames as $price => $name): ?>
-                        <label class="shipping">
-                            <span><?= esc($name) ?> (₱<?= number_format((float)$price, 2) ?>)</span>
-                            <input type="radio"
-                                   name="shipping"
-                                   value="<?= esc($price) ?>"
-                                   <?= ($selectedShipping == $price) ? 'checked' : '' ?>
-                                   onchange="this.form.submit()">
-                        </label>
-                    <?php endforeach; ?>
-                </form>
+                        <?php foreach ($shippingNames as $price => $name): ?>
+                            <label class="shipping">
+                                <span><?= esc($name) ?> (₱<?= number_format((float)$price, 2) ?>)</span>
+                                <input type="radio"
+                                    name="shipping"
+                                    value="<?= esc($price) ?>"
+                                    <?= ($selectedShipping == $price) ? 'checked' : '' ?>
+                                    onchange="this.form.submit()">
+                            </label>
+                        <?php endforeach; ?>
+                    </form>
 
-            </div>
-        <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="order-summary">
@@ -141,14 +144,14 @@ $total = 0;
 
             <?php foreach ($cartItems as $cartItem): ?>
                 <?php
-                    $productItem = $productModel->find($cartItem['productID']);
-                    if (!$productItem) continue;
+                $productItem = $productModel->find($cartItem['productID']);
+                if (!$productItem) continue;
 
-                    $price = (float) $productItem['productPrice'];
-                    $qty   = (int) $cartItem['quantity'];
+                $price = (float) $productItem['productPrice'];
+                $qty   = (int) $cartItem['quantity'];
 
-                    $itemSubtotal = $price * $qty;
-                    $total += $itemSubtotal;
+                $itemSubtotal = $price * $qty;
+                $total += $itemSubtotal;
                 ?>
 
                 <div class="cart-item">
@@ -181,7 +184,8 @@ $total = 0;
             <form action="<?= base_url('checkout/process') ?>" method="post">
                 <?= csrf_field() ?>
 
-                <input type="hidden" name="address" value="<?= esc($address) ?>">
+                <input type="hidden" name="address_id" value="<?= $savedAddress['addressID'] ?? '' ?>">
+
                 <input type="hidden" name="payment_method" value="<?= esc($selectedPayment) ?>">
                 <input type="hidden" name="shipping_fee" value="<?= esc($selectedShipping) ?>">
                 <input type="hidden" name="shipping_method" value="<?= esc($shippingDisplayName) ?>">
@@ -209,7 +213,7 @@ $total = 0;
         function updateOrderSummary() {
             const products = document.querySelectorAll(".product");
             let subtotal = 0;
-            
+
             products.forEach(p => {
                 let qty = parseInt(p.querySelector(".qty").innerText);
                 let unitPrice = parseInt(p.querySelector(".price").dataset.price);
@@ -230,4 +234,5 @@ $total = 0;
         window.onload = updateOrderSummary;
     </script>
 </body>
+
 </html>

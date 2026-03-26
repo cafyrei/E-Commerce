@@ -12,47 +12,45 @@ use App\Models\UserModel;
 
 class CartController extends BaseController
 {
-public function add()
-{
-    $productID = $this->request->getPost('productID');
-    $qty = (int) $this->request->getPost('qty');
+    public function add()
+    {
+        $productID = $this->request->getPost('productID');
+        $qty = (int) $this->request->getPost('qty');
 
-    $userID = session()->get('user_id'); // since you have login
+        $userID = session()->get('user_id'); 
 
-    $cartModel = new CartModel();
-    $cartItemModel = new CartItemModel();
+        $cartModel = new CartModel();
+        $cartItemModel = new CartItemModel();
 
-    // 1. Get or create cart
-    $cart = $cartModel->where('userID', $userID)->first();
+        $cart = $cartModel->where('userID', $userID)->first();
 
-    if (!$cart) {
-        $cartID = $cartModel->insert([
-            'userID' => $userID
-        ]);
-    } else {
-        $cartID = $cart['cartID'];
+        if (!$cart) {
+            $cartID = $cartModel->insert([
+                'userID' => $userID
+            ]);
+        } else {
+            $cartID = $cart['cartID'];
+        }
+
+        $existing = $cartItemModel
+            ->where('cartID', $cartID)
+            ->where('productID', $productID)
+            ->first();
+
+        if ($existing) {
+            $cartItemModel->update($existing['cartItemID'], [
+                'quantity' => $existing['quantity'] + $qty
+            ]);
+        } else {
+            $cartItemModel->insert([
+                'cartID' => $cartID,
+                'productID' => $productID,
+                'quantity' => $qty
+            ]);
+        }
+
+        return redirect()->back();
     }
-
-    // 2. Check if product already in cart
-    $existing = $cartItemModel
-        ->where('cartID', $cartID)
-        ->where('productID', $productID)
-        ->first();
-
-    if ($existing) {
-        $cartItemModel->update($existing['cartItemID'], [
-            'quantity' => $existing['quantity'] + $qty
-        ]);
-    } else {
-        $cartItemModel->insert([
-            'cartID' => $cartID,
-            'productID' => $productID,
-            'quantity' => $qty
-        ]);
-    }
-
-    return redirect()->back();
-}
 
     public function buyNow()
     {
@@ -79,6 +77,30 @@ public function add()
         ]);
 
         return redirect()->to(base_url('checkout'));
+    }
+
+    public function updateQuantity()
+    {
+        $id  = $this->request->getPost('cartItemID');
+        $qty = $this->request->getPost('quantity');
+
+        if ($id && $qty) {
+            $cartItemModel = new CartItemModel();
+
+            // Update database (make sure your Primary Key is 'cartItemID' in the Model)
+            $success = $cartItemModel->update($id, [
+                'quantity' => (int)$qty
+            ]);
+
+            if ($success) {
+                return $this->response->setJSON(['status' => 'success']);
+            }
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Database update failed'
+        ]);
     }
 
     public function checkout()
@@ -108,8 +130,8 @@ public function add()
             ];
         } else {
             $cart = $cartModel->where('userID', $userID)
-                              ->orderBy('cartID', 'DESC')
-                              ->first();
+                ->orderBy('cartID', 'DESC')
+                ->first();
 
             if ($cart) {
                 $rawCartItems = $cartItemModel->where('cartID', $cart['cartID'])->findAll();
@@ -182,8 +204,8 @@ public function add()
             ];
         } else {
             $cart = $cartModel->where('userID', $userID)
-                              ->orderBy('cartID', 'DESC')
-                              ->first();
+                ->orderBy('cartID', 'DESC')
+                ->first();
 
             if (!$cart) {
                 return redirect()->back()->with('error', 'Cart not found.');
@@ -249,7 +271,7 @@ public function add()
             $orderItemModel->insert([
                 'quantity' => (int) $item['quantity'],
                 'subTotal' => $itemSubTotal,
-                'productID'=> $item['productID'],
+                'productID' => $item['productID'],
                 'orderID'  => $orderID
             ]);
         }
@@ -258,8 +280,8 @@ public function add()
             session()->remove('buy_now');
         } else {
             $cart = $cartModel->where('userID', $userID)
-                              ->orderBy('cartID', 'DESC')
-                              ->first();
+                ->orderBy('cartID', 'DESC')
+                ->first();
 
             if ($cart) {
                 $cartItemModel->where('cartID', $cart['cartID'])->delete();
