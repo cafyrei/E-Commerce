@@ -26,10 +26,13 @@ $routes->get('about', 'Home::about');
 $routes->get('catalog', 'Catalog::index');
 
 // Admin
-$routes->get('admin', 'Admin\Admin::index');
-$routes->get('admin', 'Admin\Admin::index');
+$routes->get('admin', 'Admin\Admin::authenticate');
+$routes->post('admin/authenticate', 'Admin\Admin::authenticate');
+$routes->get('admin/dashboard', 'Admin\Admin::index');
 $routes->get('admin/deleteUser/(:num)', 'Admin\Admin::deleteUser/$1');
 $routes->get('admin/deleteProduct/(:num)', 'Admin\Admin::deleteProduct/$1');
+$routes->get('admin/logout', 'Admin\Admin::logout');
+$routes->post('admin/addProduct', 'Admin\Admin::addProduct');
 
 // Product Details
 $routes->get('product-details/(:num)', 'Home::productDetails/$1');
