@@ -105,7 +105,7 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
                     <?php foreach ($products as $product): ?>
                         <div class="product-card">
                             <div class="image-wrapper">
-                                <img src="<?= base_url('uploads/' . $product['productImage']) ?>"
+                                <img src="<?= base_url('assets/images/product-images/' . $product['productImage']) ?>"
                                     alt="<?= esc($product['productName']) ?>"
                                     style="width:100%; height:100%; object-fit:cover;">
                                 <div class="overlay">
@@ -125,6 +125,5 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
             </div>
         </main>
     </div>
-
 </body>
 </html>
