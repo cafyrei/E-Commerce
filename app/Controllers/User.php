@@ -83,11 +83,7 @@ class User extends BaseController
 
         $model = new AddressModel();
 
-        $addressCount = $model->where('userID', $userID)->countAllResults();
-
-        if ($addressCount >= 3) {
-            return redirect()->to('profile')->with('error', 'You can only save up to 3 addresses.');
-        }
+        $addressID = $this->request->getPost('addressID');
 
         $data = [
             'userID'   => $userID,
@@ -96,10 +92,22 @@ class User extends BaseController
             'city'     => $this->request->getPost('city'),
             'state'    => $this->request->getPost('province'),
             'zip'      => $this->request->getPost('postal'),
-            'Label'    => $this->request->getPost('label'), 
+            'Label'    => $this->request->getPost('label'),
+            'full_address' => $this->request->getPost('address')
         ];
 
-        $model->save($data);
+         if ($addressID) {
+        $data['addressID'] = $addressID;
+
+        } else {
+            $addressCount = $model->where('userID', $userID)->countAllResults();
+
+            if ($addressCount >= 3) {
+                return redirect()->to('profile')->with('error', 'You can only save up to 3 addresses.');
+        }
+    }
+
+    $model->save($data);
 
         return redirect()->to('profile')->with('success', 'Address saved!');
     }

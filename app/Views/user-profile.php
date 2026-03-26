@@ -142,7 +142,18 @@ $nav_theme = 'dark';
                                         <p><?= esc($addr['street']) ?></p>
                                         <p><?= esc($addr['city']) ?>, <?= esc($addr['state']) ?> <?= esc($addr['zip']) ?></p>
                                         <div class="address-actions">
-                                            <button class="btn-outline" type="button">Edit</button>
+                                            <button
+                                            class="btn-outline edit-btn"
+                                            type="button"
+                                            data-id="<?= esc($addr['addressID']) ?>"
+                                            data-street="<?= esc($addr['street']) ?>"
+                                            data-barangay="<?= esc($addr['barangay']) ?>"
+                                            data-city="<?= esc($addr['city']) ?>"
+                                            data-province="<?= esc($addr['state']) ?>"
+                                            data-postal="<?= esc($addr['zip']) ?>"
+                                            data-label="<?= esc($addr['label']) ?>"
+                                            data-full="<?= esc($addr['full_address'] ?? '') ?>"
+                                            >Edit</button>
                                             <form method="post" action="<?= base_url('user/deleteAddress/' . $addr['addressID']) ?>">
                                                 <?= csrf_field() ?>
                                                 <button type="submit" class="btn-outline">Delete</button>
@@ -156,37 +167,38 @@ $nav_theme = 'dark';
                         </div>
                         <form method="post" action="<?= base_url('user/updateAddress') ?>">
                             <?= csrf_field() ?>
+                            <input type="hidden" name="addressID" id="addressID" value="">
                             <h3>Add / Update Address</h3>
 
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Street</label>
-                                    <input type="text" name="street" placeholder="Street">
+                                    <input type="text" name="street" id="street" placeholder="Street">
                                 </div>
                                 <div class="input-group">
                                     <label>Barangay</label>
-                                    <input type="text" name="barangay" placeholder="City">
+                                    <input type="text" name="barangay" id="barangay" placeholder="City">
                                 </div>
                                 <div class="input-group">
                                     <label>City</label>
-                                    <input type="text" name="city" placeholder="City">
+                                    <input type="text" name="city" id="city" placeholder="City">
                                 </div>
                                 <div class="input-group">
                                     <label>Province</label>
-                                    <input type="text" name="province" placeholder="Province">
+                                    <input type="text" name="province" id="province" placeholder="Province">
                                 </div>
                                 <div class="input-group">
                                     <label>Postal Code</label>
-                                    <input type="text" name="postal" placeholder="Postal Code">
+                                    <input type="text" name="postal" id="postal" placeholder="Postal Code">
                                 </div>
                                 <div class="input-group">
                                     <label>Label (Home, Work)</label>
-                                    <input type="text" name="label" placeholder="Label">
+                                    <input type="text" name="label" id="label" placeholder="Label">
                                 </div>
                             </div>
                             <div class="input-group" style="margin-top:15px;">
                                 <label>Full Address</label>
-                                <input type="text" name="address" placeholder="Full Address">
+                                <input type="text" name="address" id="fullAddress" placeholder="Full Address">
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn-save">Save Address</button>
@@ -249,6 +261,22 @@ $nav_theme = 'dark';
             if (target) target.style.display = 'block';
         });
     });
+
+    // This for EDIT BTN
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Populate the form fields with the button's data
+        document.getElementById('street').value = btn.dataset.street;
+        document.getElementById('barangay').value = btn.dataset.barangay;
+        document.getElementById('city').value = btn.dataset.city;
+        document.getElementById('province').value = btn.dataset.province;
+        document.getElementById('postal').value = btn.dataset.postal;
+        document.getElementById('label').value = btn.dataset.label;
+        document.getElementById('fullAddress').value = btn.dataset.full;
+
+        document.getElementById('addressID').value = btn.dataset.id;
+    });
+});
 </script>
 
 </body>
