@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('assets/css/product-details.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
-    <title><?= esc($product['productName']) ?></title>
+    <title><?= esc($product['productName']) ?></title> 
 </head>
 
 <body>
-    <?php include 'partials/navbar.php'; ?>
+    <!-- <?php include 'partials/navbar.php'; ?> -->
 
     <main class="product-page">
         <div class="breadcrumb">
             <a href="<?= base_url('/')?>">Home Page</a> /
             <a href="<?= base_url('catalog')?>">Collections</a> /
-            <span><?= esc($product['productName']) ?></span>
+            <span><?= esc($product['productName']) ?></span>  // Outputs the correct one
         </div>
 
         <div class="product-container">
@@ -26,8 +26,10 @@
                 </div>
             </div>
 
-            <div class="right-side">
+            <div class="right-side"> 
                     <div class="product-details">
+                            <?= dd($product['productName']); ?> // Why this line Output Diffent name than the one in top
+
                         <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
                         <h1 class="product-name"><?= esc($product['productName']) ?></h1>
                         <p class="product-price">₱<?= number_format($product['productPrice'], 2) ?> <small>Taxes Included</small></p>
