@@ -108,7 +108,7 @@ $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
                                     alt="<?= esc($product['productName']) ?>"
                                     style="width:100%; height:100%; object-fit:cover;">
                                 <div class="overlay">
-                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">Quick View</button></a>
+                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">View Product</button></a>
                                 </div>
                             </div>
                             <div class="product-info">
