@@ -19,7 +19,7 @@ if ($sess->has('user_id')) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/navbar-light.css') ?>">
-    <title>E-Commerce</title>
+    <title>Artisan Works</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@ if ($sess->has('user_id')) {
             <span>Built to last.</span>
         </h1>
         <p>Handmade wooden furniture and pieces shaped by time, grain, and care.</p>
-        <a href="<?= base_url('home2') ?>" class="small-btn">Show more</a>
+        <a href="<?= base_url('catalog') ?>" class="small-btn">Shop Now!</a>
     </header>
 
     <div class="home2-container">
@@ -42,22 +42,22 @@ if ($sess->has('user_id')) {
                 <div class="promise-card">
                     <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-2.jpg') ?>" alt="" srcset=""></div>
                     <div class="content">
-                        <h3>Header</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                        <h3>Quality Craftsmanship</h3>
+                        <p>Every piece is built with precision and care using durable materials, ensuring long-lasting furniture that stands the test of time.</p>
                     </div>
                 </div>
                 <div class="promise-card">
-                    <div class="placeholder-box">Image</div>
+                    <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-3.jpg') ?>" alt="" srcset=""></div>
                     <div class="content">
-                        <h3>Header</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                        <h3>Comfort Meets Design</h3>
+                        <p>We combine modern aesthetics with everyday comfort, creating furniture that not only looks good but feels right in your home.</p>
                     </div>
                 </div>
                 <div class="promise-card">
-                    <div class="placeholder-box">Image</div>
+                    <div class="placeholder-box"><img src="<?= base_url('assets/images/featured-photos/featured-4.jpg') ?>"></div>
                     <div class="content">
-                        <h3>Header</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                        <h3>Reliable Delivery</h3>
+                        <p>From checkout to your doorstep, we ensure a smooth and dependable delivery experience so your furniture arrives safely and on time.</p>
                     </div>
                 </div>
             </div>
@@ -70,24 +70,24 @@ if ($sess->has('user_id')) {
             <h2 class="section-title">Featured Works</h2>
             <div class="featured-main-grid">
                 <div class="feat-box large">
-                    <div class="img-area">Image</div>
+                    <div class="img-area"><img src="<?= base_url('assets/images/featured-works/modern-living-collection.png') ?>"></div>
                     <div class="feat-footer">
                         <div>
-                            <h2>Header</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <h2>Modern Living Collection</h2>
+                            <p>A curated selection of sleek sofas, tables, and accents designed to elevate contemporary living spaces.</p>
                         </div>
-                        <a href="#" class="small-btn">Shop now</a>
+                        <a href="<?= base_url('catalog') ?>" class="small-btn">Shop now</a>
                     </div>
                 </div>
                 <div class="feat-box">
-                    <div class="img-area">Image</div>
-                    <h2>Header</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="img-area"><img src="<?= base_url('assets/images/featured-works/minimalist-workspace.png') ?>"></div>
+                    <h2>Minimalist Workspace</h2>
+                    <p>Clean, functional desks and chairs crafted to boost focus and productivity in any setup.</p>
                 </div>
                 <div class="feat-box">
-                    <div class="img-area">Image</div>
-                    <h2>Header</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="img-area"><img src="<?= base_url('assets/images/featured-works/cozy-bedroom-setup.png') ?>"></div>
+                    <h2>Cozy Bedroom Setup</h2>
+                    <p>Warm, inviting bedroom essentials designed for comfort, relaxation, and better rest.</p>
                 </div>
             </div>
         </section>
@@ -96,8 +96,8 @@ if ($sess->has('user_id')) {
     <div class="home2-container">
         <section class="custom-project-box">
             <div class="custom-content">
-                <h3>Header</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                <h3>Make Your Space Truly Yours</h3>
+                <p>Every home tells a story. Our thoughtfully crafted furniture is designed to bring comfort, character, and timeless style into every corner of your space.</p>
                 <div class="btn-group">
                     <a href="#" class="small-btn outline">Learn More &rarr;</a>
                     <a href="#" class="small-btn outline">Contact Us</a>

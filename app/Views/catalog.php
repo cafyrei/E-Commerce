@@ -14,7 +14,6 @@ if ($sess->has('user_id')) {
 <?php
 $categories = ["Bedroom", "Living Room", "Dining Room", "Home Office", "Kitchen"];
 $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
-$active_tags = ["Chairs", "₱0 - ₱5000"];
 ?>
 
 <!DOCTYPE html>
