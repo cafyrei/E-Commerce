@@ -26,7 +26,7 @@ $nav_theme = 'dark';
                 <div class="side-item-box active" data-target="account-content">My Account</div>
                 <div class="side-item-box" data-target="orders-content">My Orders</div>
                 <div class="side-item-box" data-target="favorites-content">My Favorites</div>
-                <div class="side-item-box logout">Sign Out</div>
+                <div class="side-item-box logout"><a href="<?= base_url('logout') ?>">Sign Out</a></div>
             </div>
         </aside>
 
@@ -54,7 +54,7 @@ $nav_theme = 'dark';
                             <button class="btn-outline">Edit Photo</button>
                         </div>
 
-                        <form method="post" action="<?= base_url('updateProfile') ?>">
+                        <form method="post" action="<?= base_url('user/updateProfile') ?>">
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>First Name</label>
@@ -135,10 +135,10 @@ $nav_theme = 'dark';
                     </div>
                     <div class="accordion-content">
                         <div class="address-list">
+                            <h4>Saved Address</h4>
                             <?php if (!empty($addresses)): ?>
                                 <?php foreach ($addresses as $addr): ?>
                                     <div class="address-card">
-                                        <h4><?= esc($addr['label'] ?? 'Address') ?></h4>
                                         <p><?= esc($addr['street']) ?></p>
                                         <p><?= esc($addr['city']) ?>, <?= esc($addr['state']) ?> <?= esc($addr['zip']) ?></p>
                                         <div class="address-actions">
@@ -155,7 +155,9 @@ $nav_theme = 'dark';
                             <?php endif; ?>
                         </div>
                         <form method="post" action="<?= base_url('user/updateAddress') ?>">
-                            <h3>Add New Address</h3>
+                            <?= csrf_field() ?>
+                            <h3>Add / Update Address</h3>
+
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Street</label>
@@ -187,7 +189,7 @@ $nav_theme = 'dark';
                                 <input type="text" name="address" placeholder="Full Address">
                             </div>
                             <div class="form-actions">
-                                <button type="submit" class="btn-save">Add Address</button>
+                                <button type="submit" class="btn-save">Save Address</button>
                             </div>
                         </form>
                     </div>
