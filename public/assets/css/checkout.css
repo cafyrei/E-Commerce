@@ -334,9 +334,14 @@ textarea:focus {
     padding: 15px;
     border: none;
     border-radius: 25px;
-    background: #555;
+    background: var(--primary);
     color: white;
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
+}
+
+.checkout-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
 }
