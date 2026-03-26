@@ -27,7 +27,6 @@
             </div>
 
             <div class="right-side">
-                <form action="<?= base_url('cart/add') ?>" method="post">
                     <div class="product-details">
                         <span class="status"><?= esc($product['productStock']) > 0 ? 'Available' : 'Out of Stock' ?></span>
                         <h1 class="product-name"><?= esc($product['productName']) ?></h1>
@@ -43,10 +42,6 @@
                             <button type="button" class="minus">-</button>
                             <span id="qty">1</span>
                             <button type="button" class="plus">+</button>
-
-                            <!-- Hidden inputs for back-end -->
-                            <input type="hidden" name="productID" value="<?= $product['productID'] ?>">
-                            <input type="hidden" name="qty" id="qtyInput" value="1">
                         </div>
                     </div>
 
@@ -58,10 +53,31 @@
                     </div>
 
                     <div class="product-actions">
-                        <button type="submit" class="add-to-cart">Add to Cart</button>
-                        <button type="button" class="buy-now">Buy it now</button>
+                        <form action="<?= base_url('cart/add') ?>" method="post">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="productID" value="<?= $product['productID'] ?>">
+                            <input type="hidden" name="qty" id="qtyInput" value="1">
+
+                            <?php if ((int) $product['productStock'] > 0): ?>
+                            <button type="submit" class="add-to-cart">Add to Cart</button>
+                            <?php else: ?>
+                            <button type="button" class="add-to-cart" disabled>Out of Stock</button>
+                            <?php endif; ?>
+                        </form>
+
+                        <form action="<?= base_url('buy-now') ?>" method="post">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="productID" value="<?= $product['productID'] ?>">
+                            <input type="hidden" name="qty" id="buyQtyInput" value="1">
+
+                            <?php if ((int) $product['productStock'] > 0): ?>
+                            <button type="submit" class="buy-now">Buy it now</button>
+                            <?php else: ?>
+                            <button type="button" class="buy-now" disabled>Out of Stock</button>
+                            <?php endif; ?>
+                    </form>
                     </div>
-                </form>
+
 
                 <div class="product-info">
                     <details>
@@ -83,7 +99,7 @@
                     </details>
                     <details>
                         <summary>Shipping and Delivery</summary>
-                        <p>Shipping details...</p>
+                        <p>Learn more about Shipping and Delivery through the Checkout Page</p>
                     </details>
                 </div>
             </div>
@@ -91,35 +107,43 @@
 </body>
 
 <script>
-    function updateButtons() {
-        minusBtn.disabled = count <= 1;
-        plusBtn.disabled = count >= maxStock;
-    }
+        const minusBtn = document.querySelector(".minus");
+        const plusBtn = document.querySelector(".plus");
+        const qty = document.getElementById("qty");
+        const qtyInput = document.getElementById("qtyInput");
+        const buyQtyInput = document.getElementById("buyQtyInput");
 
-    const minusBtn = document.querySelector(".minus");
-    const plusBtn = document.querySelector(".plus");
-    const qty = document.getElementById("qty");
-    const qtyInput = document.getElementById("qty");
-    const maxStock = <?= (int)$product['productStock'] ?>;
+        const maxStock = <?= (int) $product['productStock'] ?>;
+        let count = 1;
 
-let count = 1;
+        function syncQtyInputs() {
+            qty.textContent = count;
+            qtyInput.value = count;
+            buyQtyInput.value = count;
+        }
 
-plusBtn.addEventListener("click", () => {
-    if (count < maxStock){
-        count++;
-        qty.textContent = count;
-        qtyInput.value = count;
-    }
-    updateButtons();
-});
+        function updateButtons() {
+            minusBtn.disabled = count <= 1;
+            plusBtn.disabled = count >= maxStock || maxStock <= 0;
+        }
 
-minusBtn.addEventListener("click", () => {
-  if (count > 1) {
-    count--;
-    qty.textContent = count;
-    qtyInput.value = count;
-  }
-  updateButtons();
-});
+        plusBtn.addEventListener("click", () => {
+            if (count < maxStock) {
+                count++;
+                syncQtyInputs();
+            }
+            updateButtons();
+        });
+
+        minusBtn.addEventListener("click", () => {
+            if (count > 1) {
+                count--;
+                syncQtyInputs();
+            }
+            updateButtons();
+        });
+
+        syncQtyInputs();
+        updateButtons();
 </script>
 </html>
