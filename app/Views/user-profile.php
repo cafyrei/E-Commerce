@@ -26,7 +26,7 @@ $nav_theme = 'dark';
                 <div class="side-item-box active" data-target="account-content">My Account</div>
                 <div class="side-item-box" data-target="orders-content">My Orders</div>
                 <div class="side-item-box" data-target="favorites-content">My Favorites</div>
-                <div class="side-item-box logout">Sign Out</div>
+                <div class="side-item-box logout"><a href="<?= base_url('logout') ?>">Sign Out</a></div>
             </div>
         </aside>
 
@@ -54,7 +54,7 @@ $nav_theme = 'dark';
                             <button class="btn-outline">Edit Photo</button>
                         </div>
 
-                        <form method="post" action="<?= base_url('updateProfile') ?>">
+                        <form method="post" action="<?= base_url('user/updateProfile') ?>">
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>First Name</label>
@@ -135,14 +135,25 @@ $nav_theme = 'dark';
                     </div>
                     <div class="accordion-content">
                         <div class="address-list">
+                            <h4>Saved Address</h4>
                             <?php if (!empty($addresses)): ?>
                                 <?php foreach ($addresses as $addr): ?>
                                     <div class="address-card">
-                                        <h4><?= esc($addr['label'] ?? 'Address') ?></h4>
                                         <p><?= esc($addr['street']) ?></p>
                                         <p><?= esc($addr['city']) ?>, <?= esc($addr['state']) ?> <?= esc($addr['zip']) ?></p>
                                         <div class="address-actions">
-                                            <button class="btn-outline" type="button">Edit</button>
+                                            <button
+                                            class="btn-outline edit-btn"
+                                            type="button"
+                                            data-id="<?= esc($addr['addressID']) ?>"
+                                            data-street="<?= esc($addr['street']) ?>"
+                                            data-barangay="<?= esc($addr['barangay']) ?>"
+                                            data-city="<?= esc($addr['city']) ?>"
+                                            data-province="<?= esc($addr['state']) ?>"
+                                            data-postal="<?= esc($addr['zip']) ?>"
+                                            data-label="<?= esc($addr['label']) ?>"
+                                            data-full="<?= esc($addr['full_address'] ?? '') ?>"
+                                            >Edit</button>
                                             <form method="post" action="<?= base_url('user/deleteAddress/' . $addr['addressID']) ?>">
                                                 <?= csrf_field() ?>
                                                 <button type="submit" class="btn-outline">Delete</button>
@@ -155,39 +166,42 @@ $nav_theme = 'dark';
                             <?php endif; ?>
                         </div>
                         <form method="post" action="<?= base_url('user/updateAddress') ?>">
-                            <h3>Add New Address</h3>
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="addressID" id="addressID" value="">
+                            <h3>Add / Update Address</h3>
+
                             <div class="form-grid">
                                 <div class="input-group">
                                     <label>Street</label>
-                                    <input type="text" name="street" placeholder="Street">
+                                    <input type="text" name="street" id="street" placeholder="Street">
                                 </div>
                                 <div class="input-group">
                                     <label>Barangay</label>
-                                    <input type="text" name="barangay" placeholder="City">
+                                    <input type="text" name="barangay" id="barangay" placeholder="City">
                                 </div>
                                 <div class="input-group">
                                     <label>City</label>
-                                    <input type="text" name="city" placeholder="City">
+                                    <input type="text" name="city" id="city" placeholder="City">
                                 </div>
                                 <div class="input-group">
                                     <label>Province</label>
-                                    <input type="text" name="province" placeholder="Province">
+                                    <input type="text" name="province" id="province" placeholder="Province">
                                 </div>
                                 <div class="input-group">
                                     <label>Postal Code</label>
-                                    <input type="text" name="postal" placeholder="Postal Code">
+                                    <input type="text" name="postal" id="postal" placeholder="Postal Code">
                                 </div>
                                 <div class="input-group">
                                     <label>Label (Home, Work)</label>
-                                    <input type="text" name="label" placeholder="Label">
+                                    <input type="text" name="label" id="label" placeholder="Label">
                                 </div>
                             </div>
                             <div class="input-group" style="margin-top:15px;">
                                 <label>Full Address</label>
-                                <input type="text" name="address" placeholder="Full Address">
+                                <input type="text" name="address" id="fullAddress" placeholder="Full Address">
                             </div>
                             <div class="form-actions">
-                                <button type="submit" class="btn-save">Add Address</button>
+                                <button type="submit" class="btn-save">Save Address</button>
                             </div>
                         </form>
                     </div>
@@ -200,6 +214,54 @@ $nav_theme = 'dark';
                     <h2>Order History</h2>
                     <p>Your previous orders will be listed here.</p>
                 </div>
+
+                <?php if (!empty($orders)): ?>
+                    <?php foreach ($orders as $order): ?>
+                        <div class="accordion-section active" style="margin-bottom:20px;">
+                            <div class="accordion-header">
+                                <span>Order #<?= esc($order['orderID']) ?> - <?= esc($order['status']) ?></span>
+                                <span class="arrow">▶</span>
+                            </div>
+
+                            <div class="accordion-content" style="display:block;">
+                                <p><strong>Payment:</strong> <?= esc($order['paymentMethod']) ?></p>
+                                <p><strong>Shipping:</strong> <?= esc($order['shippingMethod']) ?> (₱<?= number_format($order['shippingCost'], 2) ?>)</p>
+                                <p><strong>Total:</strong> ₱<?= number_format($order['totalAmount'], 2) ?></p>
+
+                                <hr style="margin:15px 0;">
+
+                                <?php if (!empty($order['items'])): ?>
+                                    <?php foreach ($order['items'] as $item): ?>
+                                        <?php if (!empty($item['product'])): ?>
+                                            <div class="order-item" style="display:flex; gap:20px; align-items:center; margin-bottom:20px;">
+                                                <div class="order-item-img">
+                                                    <img src="<?= base_url('assets/images/product-images/' . $item['product']['productImage']) ?>"
+                                                         alt="<?= esc($item['product']['productName']) ?>"
+                                                         style="width:120px; height:120px; object-fit:cover; border-radius:8px;">
+                                                </div>
+
+                                                <div class="order-item-details">
+                                                    <p><strong><?= esc($item['product']['productName']) ?></strong></p>
+                                                    <p>₱<?= number_format($item['product']['productPrice'], 2) ?></p>
+                                                    <p>Qty: <?= esc($item['quantity']) ?></p>
+                                                    <p>Subtotal: ₱<?= number_format($item['subTotal'], 2) ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>No items found for this order.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="accordion-section active">
+                        <div class="accordion-content" style="display:block;">
+                            <p>No orders yet.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- FAVORITES TAB -->
@@ -247,6 +309,22 @@ $nav_theme = 'dark';
             if (target) target.style.display = 'block';
         });
     });
+
+    // This for EDIT BTN
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Populate the form fields with the button's data
+        document.getElementById('street').value = btn.dataset.street;
+        document.getElementById('barangay').value = btn.dataset.barangay;
+        document.getElementById('city').value = btn.dataset.city;
+        document.getElementById('province').value = btn.dataset.province;
+        document.getElementById('postal').value = btn.dataset.postal;
+        document.getElementById('label').value = btn.dataset.label;
+        document.getElementById('fullAddress').value = btn.dataset.full;
+
+        document.getElementById('addressID').value = btn.dataset.id;
+    });
+});
 </script>
 
 </body>

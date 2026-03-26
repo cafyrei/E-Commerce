@@ -67,6 +67,11 @@ body {
   justify-content: center;
 }
 
+.side-item-box a {
+  color: black;
+  text-decoration: none;
+}
+
 .refresh-icon {
   font-size: 20px;
   font-weight: bold;

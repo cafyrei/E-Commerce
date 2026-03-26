@@ -8,6 +8,8 @@ class OrderItemsModel extends Model
 {
     protected $table      = 'order_items';
     protected $primaryKey = 'orderedItemsID';
+    protected $useAutoIncrement = true;
+    protected $returnType = 'array';
     protected $allowedFields    = [
         'quantity',
         'subTotal',

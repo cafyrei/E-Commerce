@@ -14,7 +14,6 @@ if ($sess->has('user_id')) {
 <?php
 $categories = ["Bedroom", "Living Room", "Dining Room", "Home Office", "Kitchen"];
 $types = ["Chairs", "Beds", "Shelving", "Desks", "Wardrobes"];
-$active_tags = ["Chairs", "₱0 - ₱5000"];
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +24,7 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artisan Furniture | Product Catalog</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/catalog-modern.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/navbar-dark.css') ?>">
 </head>
 <body>
 
@@ -105,11 +105,11 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
                     <?php foreach ($products as $product): ?>
                         <div class="product-card">
                             <div class="image-wrapper">
-                                <img src="<?= base_url('uploads/' . $product['productImage']) ?>"
+                                <img src="<?= base_url('assets/images/product-images/' . $product['productImage']) ?>"
                                     alt="<?= esc($product['productName']) ?>"
                                     style="width:100%; height:100%; object-fit:cover;">
                                 <div class="overlay">
-                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">Quick View</button></a>
+                                    <a href="<?= base_url('product-details/' . $product['productID']) ?>"><button class="view-btn">View Product</button></a>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -125,6 +125,5 @@ $active_tags = ["Chairs", "₱0 - ₱5000"];
             </div>
         </main>
     </div>
-
 </body>
 </html>

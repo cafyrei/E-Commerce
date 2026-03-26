@@ -19,6 +19,9 @@ $routes->post('user/updatePassword', 'User::updatePassword');
 $routes->post('user/updateAddress', 'User::updateAddress');
 $routes->post('user/deleteAddress/(:num)', 'User::deleteAddress/$1');
 
+// About Page
+$routes->get('about', 'Home::about');
+
 // Catalog
 $routes->get('catalog', 'Catalog::index');
 
@@ -34,13 +37,9 @@ $routes->post('admin/addProduct', 'Admin\Admin::addProduct');
 // Product Details
 $routes->get('product-details/(:num)', 'Home::productDetails/$1');
 
-// Adding Cart
+// Cart and Checkout
 $routes->post('cart/add', 'CartController::add');
-
-$routes->get('catalog', 'Home::productCatalog');
-$routes->get('checkout', 'Home::checkout');
-$routes->get('signup', 'Home::signup');
-$routes->get('home2', 'Home::home2');
-$routes->get('about', 'Home::about');
-$routes->get('contact', 'Home::contact');
-$routes->get('admin_signin', 'Home::adminSignin'); // admin
+$routes->post('cart/update-quantity', 'CartController::updateQuantity');
+$routes->get('checkout', 'CartController::checkout');
+$routes->post('buy-now', 'CartController::buyNow');
+$routes->post('checkout/process', 'CartController::processCheckout');
